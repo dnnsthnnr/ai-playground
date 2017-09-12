@@ -163,7 +163,7 @@ AppModule = __decorate([
 /***/ "../../../../../src/app/components/app/app.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<header>\r\n  <button class=\"btn btn-primary\" (click)=\"isCollapsed = !isCollapsed; $event.stopPropagation();\"><i\r\n    class=\"fa fa-bars\"></i></button>\r\n  <div class=\"navbar-brand\">AI Playground</div>\r\n</header>\r\n<nav class=\"aip-sidenav\" [ngbCollapse]=\"isCollapsed\">\r\n  <div class=\"list-group\">\r\n    <div class=\"list-group-item list-group-item-light\">Demos</div>\r\n    <a class=\"list-group-item\" routerLink=\"/sketch\" routerLinkActive=\"aip-active\">Draw Sketch</a>\r\n  </div>\r\n  <div class=\"list-group\">\r\n    <div class=\"list-group-item list-group-item-light\">Info</div>\r\n    <a class=\"list-group-item\" routerLink=\"/roadmap\" routerLinkActive=\"aip-active\">Roadmap</a>\r\n  </div>\r\n</nav>\r\n<router-outlet></router-outlet>\r\n"
+module.exports = "<header #header>\r\n  <button class=\"btn btn-primary\" (click)=\"isCollapsed = !isCollapsed; $event.stopPropagation();\"><i\r\n    class=\"fa fa-bars\"></i></button>\r\n  <div class=\"navbar-brand\">AI Playground</div>\r\n</header>\r\n<nav class=\"aip-sidenav\" [ngbCollapse]=\"isCollapsed\">\r\n  <div class=\"list-group\">\r\n    <div class=\"list-group-item list-group-item-light\">Demos</div>\r\n    <a class=\"list-group-item\" routerLink=\"/sketch\" routerLinkActive=\"aip-active\">Draw Sketch</a>\r\n  </div>\r\n  <div class=\"list-group\">\r\n    <div class=\"list-group-item list-group-item-light\">Info</div>\r\n    <a class=\"list-group-item\" routerLink=\"/roadmap\" routerLinkActive=\"aip-active\">Roadmap</a>\r\n  </div>\r\n</nav>\r\n<div [style.marginTop]=\"getHeaderHeight()\">\r\n  <router-outlet></router-outlet>\r\n</div>\r\n"
 
 /***/ }),
 
@@ -175,7 +175,7 @@ exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-b
 
 
 // module
-exports.push([module.i, ".aip-title {\n  padding: 3rem;\n  text-align: center;\n  background-color: #868e96;\n  color: #dee2e6; }\n  .aip-title .aip-uppercase-let {\n    display: block;\n    font-weight: bold;\n    font-size: 500%; }\n\n.aip-sidenav {\n  position: fixed;\n  left: 0;\n  top: 0;\n  bottom: 0;\n  background-color: #fff;\n  box-shadow: 3px 0 6px rgba(0, 0, 0, 0.24);\n  padding: 1rem 0; }\n  .aip-sidenav .list-group .list-group-item {\n    padding: 0.75rem 2rem; }\n    .aip-sidenav .list-group .list-group-item.list-group-item-light {\n      padding-left: 1rem; }\n  .aip-sidenav .list-group a {\n    color: #495057; }\n    .aip-sidenav .list-group a.aip-active {\n      background-color: #007bff;\n      color: #fff; }\n\nheader {\n  position: fixed;\n  top: 0;\n  left: 0;\n  right: 0;\n  background-color: #007bff;\n  color: #dee2e6;\n  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.24);\n  padding: 0.5rem; }\n  header button {\n    box-shadow: none; }\n", ""]);
+exports.push([module.i, ".aip-title {\n  padding: 3rem;\n  text-align: center;\n  background-color: #868e96;\n  color: #dee2e6; }\n  .aip-title .aip-uppercase-let {\n    display: block;\n    font-weight: bold;\n    font-size: 500%; }\n\n.aip-sidenav {\n  position: fixed;\n  left: 0;\n  top: 0;\n  bottom: 0;\n  background-color: #fff;\n  box-shadow: 3px 0 6px rgba(0, 0, 0, 0.24);\n  padding: 1rem 0;\n  z-index: 1000; }\n  .aip-sidenav .list-group .list-group-item {\n    padding: 0.75rem 2rem; }\n    .aip-sidenav .list-group .list-group-item.list-group-item-light {\n      padding-left: 1rem; }\n  .aip-sidenav .list-group a {\n    color: #495057; }\n    .aip-sidenav .list-group a.aip-active {\n      background-color: #007bff;\n      color: #fff; }\n\nheader {\n  position: fixed;\n  top: 0;\n  left: 0;\n  right: 0;\n  background-color: #007bff;\n  color: #dee2e6;\n  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.24);\n  padding: 0.5rem;\n  z-index: 999; }\n  header button {\n    box-shadow: none; }\n", ""]);
 
 // exports
 
@@ -197,6 +197,9 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
 
 var AppComponent = (function () {
     function AppComponent() {
@@ -208,8 +211,15 @@ var AppComponent = (function () {
             _this.isCollapsed = true;
         };
     };
+    AppComponent.prototype.getHeaderHeight = function () {
+        return getComputedStyle(this.header.nativeElement).height;
+    };
     return AppComponent;
 }());
+__decorate([
+    __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["ViewChild"])('header'),
+    __metadata("design:type", typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_0__angular_core__["ElementRef"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_0__angular_core__["ElementRef"]) === "function" && _a || Object)
+], AppComponent.prototype, "header", void 0);
 AppComponent = __decorate([
     __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
         selector: 'app-root',
@@ -218,6 +228,7 @@ AppComponent = __decorate([
     })
 ], AppComponent);
 
+var _a;
 //# sourceMappingURL=app.component.js.map
 
 /***/ }),
@@ -286,7 +297,7 @@ RoadmapComponent = __decorate([
 /***/ "../../../../../src/app/sketch-classification/components/sketch-classifier/sketch-classifier.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div *ngIf=\"!modelLoaded\">\r\n  <ngb-progressbar mode=\"indeterminate\"></ngb-progressbar>\r\n</div>\r\n<ng-container *ngIf=\"modelLoaded\">\r\n  <div class=\"card\">\r\n    <div class=\"aip-chart-container card-body\">\r\n      <canvas baseChart chartType=\"doughnut\" width=\"320\" height=\"320\" [labels]=\"classes\" [data]=\"classScores\"\r\n              [legend]=\"false\" [colors]=\"colors\"></canvas>\r\n      <div class=\"aip-classifier-result\" *ngIf=\"classScores.length\">\r\n        I think it's a <b>{{getMaxClass()}}</b>\r\n      </div>\r\n    </div>\r\n    <div class=\"aip-sketch-wait-overlay\" [@fadeInOut]=\"classScores.length > 0 && hasScores ? 'invisible' : 'visible'\">\r\n      <div>\r\n        <b>Waiting for You to draw something beautiful ;-)</b>\r\n      </div>\r\n    </div>\r\n  </div>\r\n</ng-container>\r\n"
+module.exports = "<ng-container *ngIf=\"modelSvc.modelLoaded\">\r\n  <div class=\"card\">\r\n    <div class=\"aip-chart-container card-body\">\r\n      <canvas baseChart chartType=\"doughnut\" width=\"320\" height=\"320\" [labels]=\"modelSvc.classes\" [data]=\"modelSvc.classScores\"\r\n              [legend]=\"false\" [colors]=\"colors\"></canvas>\r\n      <div class=\"aip-classifier-result\" *ngIf=\"modelSvc.classScores.length\">\r\n        I think it's a <b>{{getMaxClass()}}</b>\r\n      </div>\r\n    </div>\r\n    <div class=\"aip-sketch-wait-overlay\" [@fadeInOut]=\"modelSvc.classScores.length > 0 && modelSvc.hasScores ? 'invisible' : 'visible'\">\r\n      <div>\r\n        <b>Waiting for You to draw something beautiful ;-)</b>\r\n      </div>\r\n    </div>\r\n  </div>\r\n</ng-container>\r\n"
 
 /***/ }),
 
@@ -313,13 +324,10 @@ module.exports = module.exports.toString();
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/@angular/core.es5.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_deeplearn__ = __webpack_require__("../../../../deeplearn/dist/src/index.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_deeplearn___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_deeplearn__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_deeplearn_dist_src_util__ = __webpack_require__("../../../../deeplearn/dist/src/util.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_deeplearn_dist_src_util___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_deeplearn_dist_src_util__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_rxjs_add_observable_of__ = __webpack_require__("../../../../rxjs/add/observable/of.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_rxjs_add_observable_of___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_rxjs_add_observable_of__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__animations__ = __webpack_require__("../../../../../src/app/animations.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_rxjs_add_observable_of__ = __webpack_require__("../../../../rxjs/add/observable/of.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_rxjs_add_observable_of___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_rxjs_add_observable_of__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__animations__ = __webpack_require__("../../../../../src/app/animations.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__service_sketch_classification_model_service__ = __webpack_require__("../../../../../src/app/sketch-classification/service/sketch-classification-model.service.ts");
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return SketchClassifierComponent; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -334,10 +342,10 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
-
-var SketchClassifierComponent = SketchClassifierComponent_1 = (function () {
-    function SketchClassifierComponent() {
-        this.g = new __WEBPACK_IMPORTED_MODULE_1_deeplearn__["Graph"]();
+var SketchClassifierComponent = (function () {
+    function SketchClassifierComponent(modelSvc, host) {
+        this.modelSvc = modelSvc;
+        this.host = host;
         this.colors = [
             {
                 backgroundColor: '#2196F3'
@@ -388,92 +396,18 @@ var SketchClassifierComponent = SketchClassifierComponent_1 = (function () {
                 backgroundColor: '#E91E63'
             },
         ];
-        this.classes = SketchClassifierComponent_1.CLASSES;
-        this.classScores = [];
-        this.hasScores = false;
-        this.modelLoaded = false;
+        console.debug(this.host);
     }
     SketchClassifierComponent.prototype.ngOnInit = function () {
-        try {
-            this.math = new __WEBPACK_IMPORTED_MODULE_1_deeplearn__["NDArrayMathGPU"]();
-            console.debug('using gpu');
-        }
-        catch (err) {
-            console.debug(err);
-            console.debug('using cpu');
-            this.math = new __WEBPACK_IMPORTED_MODULE_1_deeplearn__["NDArrayMathCPU"]();
-        }
-        this.modelReady = this.loadModel();
+        this.modelSvc.loadModel();
     };
-    /**
-     * initialize model graph and load model weights
-     * @returns {Promise<any>}
-     */
-    SketchClassifierComponent.prototype.loadModel = function () {
+    SketchClassifierComponent.prototype.ngAfterViewInit = function () {
         var _this = this;
-        var varLoader = new __WEBPACK_IMPORTED_MODULE_1_deeplearn__["CheckpointLoader"](document.head.baseURI + 'assets/deeplearn/sketch_classification/');
-        return new Promise(function (resolve, reject) {
-            varLoader.getAllVariables().then(function (vars) {
-                _this.inputTensor = _this.g.placeholder('input', [32, 32, 1]);
-                var conv1 = _this.g.conv2d(_this.inputTensor, _this.g.constant(vars['conv2d_1/kernel']), _this.g.constant(vars['conv2d_1/bias']), 3, 32, 1, 1);
-                var conv1_relu = _this.g.relu(conv1);
-                var conv2 = _this.g.conv2d(conv1_relu, _this.g.constant(vars['conv2d_2/kernel']), _this.g.constant(vars['conv2d_2/bias']), 3, 32, 1, 1);
-                var conv2_relu = _this.g.relu(conv2);
-                var conv3 = _this.g.conv2d(conv2_relu, _this.g.constant(vars['conv2d_3/kernel']), _this.g.constant(vars['conv2d_3/bias']), 3, 32, 1, 1);
-                var conv3_relu = _this.g.relu(conv3);
-                var maxPool1 = _this.g.maxPool(conv3_relu, 2, 2, 0);
-                var conv4 = _this.g.conv2d(maxPool1, _this.g.constant(vars['conv2d_4/kernel']), _this.g.constant(vars['conv2d_4/bias']), 3, 64, 1, 1);
-                var conv4_relu = _this.g.relu(conv4);
-                var conv5 = _this.g.conv2d(conv4_relu, _this.g.constant(vars['conv2d_5/kernel']), _this.g.constant(vars['conv2d_5/bias']), 3, 64, 1, 1);
-                var conv5_relu = _this.g.relu(conv5);
-                var conv6 = _this.g.conv2d(conv5_relu, _this.g.constant(vars['conv2d_6/kernel']), _this.g.constant(vars['conv2d_6/bias']), 3, 64, 1, 1);
-                var conv6_relu = _this.g.relu(conv6);
-                var maxPool2 = _this.g.maxPool(conv6_relu, 2, 2, 0);
-                var conv7 = _this.g.conv2d(maxPool2, _this.g.constant(vars['conv2d_7/kernel']), _this.g.constant(vars['conv2d_7/bias']), 3, 128, 1, 1);
-                var conv7_relu = _this.g.relu(conv7);
-                var conv8 = _this.g.conv2d(conv7_relu, _this.g.constant(vars['conv2d_8/kernel']), _this.g.constant(vars['conv2d_8/bias']), 3, 128, 1, 1);
-                var conv8_relu = _this.g.relu(conv8);
-                var conv9 = _this.g.conv2d(conv8_relu, _this.g.constant(vars['conv2d_9/kernel']), _this.g.constant(vars['conv2d_9/bias']), 3, 128, 1, 1);
-                var conv9_relu = _this.g.relu(conv9);
-                var maxPool3 = _this.g.maxPool(conv9_relu, 2, 2, 0);
-                var reshape = _this.g.reshape(maxPool3, [__webpack_require__.i(__WEBPACK_IMPORTED_MODULE_2_deeplearn_dist_src_util__["sizeFromShape"])(maxPool3.shape)]);
-                var dense1 = _this.g.layers.dense('dense1', reshape, 512, null, true, new __WEBPACK_IMPORTED_MODULE_1_deeplearn__["NDArrayInitializer"](vars['dense_1/kernel']), new __WEBPACK_IMPORTED_MODULE_1_deeplearn__["NDArrayInitializer"](vars['dense_1/bias']));
-                var dense1_relu = _this.g.relu(dense1);
-                var dense2 = _this.g.layers.dense('dense2', dense1_relu, 512, null, true, new __WEBPACK_IMPORTED_MODULE_1_deeplearn__["NDArrayInitializer"](vars['dense_2/kernel']), new __WEBPACK_IMPORTED_MODULE_1_deeplearn__["NDArrayInitializer"](vars['dense_2/bias']));
-                var dense2_relu = _this.g.relu(dense2);
-                var dense3 = _this.g.layers.dense('dense3', dense2_relu, 16, null, true, new __WEBPACK_IMPORTED_MODULE_1_deeplearn__["NDArrayInitializer"](vars['dense_3/kernel']), new __WEBPACK_IMPORTED_MODULE_1_deeplearn__["NDArrayInitializer"](vars['dense_3/bias']));
-                _this.predictionTensor = _this.g.softmax(dense3);
-                _this.modelLoaded = true;
-                resolve();
-            }).catch(function (err) {
-                reject(err);
-            });
-        });
-    };
-    /**
-     * let the model predict
-     * @param data
-     */
-    SketchClassifierComponent.prototype.predict = function (data) {
-        var _this = this;
-        this.classScores = [];
-        this.modelReady.then(function () {
-            var sess = new __WEBPACK_IMPORTED_MODULE_1_deeplearn__["Session"](_this.g, _this.math);
-            _this.math.scope(function (keep, track) {
-                var mapping = [{
-                        tensor: _this.inputTensor,
-                        data: data
-                    }];
-                var result = sess.eval(_this.predictionTensor, mapping);
-                var tmpClassScores = [];
-                result.getValues().forEach(function (score, index) {
-                    tmpClassScores.push(Math.round(score * 100));
-                });
-                _this.classScores = tmpClassScores;
-                _this.hasScores = true;
-            });
-        }).catch(function (error) {
-            console.debug(error);
+        this.modelSvc.predictionFinished.subscribe(function () {
+            var box = _this.host.nativeElement.getBoundingClientRect();
+            // if less than half the host is visible scroll it into view TODO animate scrolling
+            if (box.top > window.innerHeight - (box.bottom - box.top) / 2)
+                _this.host.nativeElement.scrollIntoView(true);
         });
     };
     /**
@@ -481,46 +415,25 @@ var SketchClassifierComponent = SketchClassifierComponent_1 = (function () {
      * @returns {string}
      */
     SketchClassifierComponent.prototype.getMaxClass = function () {
-        var max = Math.max.apply(Math, this.classScores);
-        var idx = this.classScores.indexOf(max);
-        return this.classes[idx];
-    };
-    SketchClassifierComponent.prototype.clearScores = function () {
-        this.hasScores = false;
+        var max = Math.max.apply(Math, this.modelSvc.classScores);
+        var idx = this.modelSvc.classScores.indexOf(max);
+        return this.modelSvc.classes[idx];
     };
     return SketchClassifierComponent;
 }());
-SketchClassifierComponent.CLASSES = [
-    'Circle',
-    'Square',
-    'Line',
-    'Baseball',
-    'Apple',
-    'Door',
-    'Book',
-    'Triangle',
-    'Hexagon',
-    'Octagon',
-    'Laptop',
-    'Pizza',
-    'Envelope',
-    'Clock',
-    'Camera',
-    'Face'
-];
-SketchClassifierComponent = SketchClassifierComponent_1 = __decorate([
+SketchClassifierComponent = __decorate([
     __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
         selector: 'aip-sketch-classifier',
         template: __webpack_require__("../../../../../src/app/sketch-classification/components/sketch-classifier/sketch-classifier.component.html"),
         styles: [__webpack_require__("../../../../../src/app/sketch-classification/components/sketch-classifier/sketch-classifier.component.scss")],
         animations: [
-            __WEBPACK_IMPORTED_MODULE_4__animations__["a" /* fadeInOutAnimation */]
+            __WEBPACK_IMPORTED_MODULE_2__animations__["a" /* fadeInOutAnimation */]
         ]
     }),
-    __metadata("design:paramtypes", [])
+    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_3__service_sketch_classification_model_service__["a" /* SketchClassificationModelService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__service_sketch_classification_model_service__["a" /* SketchClassificationModelService */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_0__angular_core__["ElementRef"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_0__angular_core__["ElementRef"]) === "function" && _b || Object])
 ], SketchClassifierComponent);
 
-var SketchClassifierComponent_1;
+var _a, _b;
 //# sourceMappingURL=sketch-classifier.component.js.map
 
 /***/ }),
@@ -528,7 +441,7 @@ var SketchClassifierComponent_1;
 /***/ "../../../../../src/app/sketch-classification/components/sketch-draw/sketch-draw.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"card\">\r\n  <div class=\"card-body\">\r\n    <div><h2>Draw Something!</h2>\r\n      <canvas #drawCanvas [width]=\"10 * targetSize\" [height]=\"10 * targetSize\"\r\n              (mousedown)=\"startDrawing($event)\" (mousemove)=\"draw($event)\" (mouseleave)=\"stopDrawing()\"\r\n              (mouseup)=\"stopDrawing()\"></canvas>\r\n    </div>\r\n    <div>\r\n      <button class=\"btn btn-secondary\" (click)=\"clearCanvas()\">Clear</button>\r\n      <button class=\"btn btn-light\" (click)=\"modalSvc.open(helpContent)\"><i class=\"fa fa-question\"></i></button>\r\n    </div>\r\n  </div>\r\n</div>\r\n<ng-template #helpContent>\r\n  <div class=\"modal-header\">\r\n    <h2>Don't know what to draw?</h2>\r\n  </div>\r\n  <div class=\"modal-body\">\r\n    <div>Currently we can recognize drawings of these objects:</div>\r\n    <ul>\r\n      <li *ngFor=\"let c of supportedClasses\">{{c}}</li>\r\n    </ul>\r\n    <div>We will be adding more object classes in the future.</div>\r\n  </div>\r\n</ng-template>\r\n\r\n"
+module.exports = "<div class=\"card\">\r\n  <div class=\"card-body\">\r\n    <div><h2>Draw Something!</h2>\r\n      <canvas #drawCanvas [width]=\"10 * targetSize\" [height]=\"10 * targetSize\"\r\n              (mousedown)=\"startDrawing($event)\" (touchstart)=\"startDrawing($event)\" (mousemove)=\"draw($event)\"\r\n              (touchmove)=\"draw($event)\" (mouseleave)=\"stopDrawing()\"\r\n              (mouseup)=\"stopDrawing()\" (touchend)=\"stopDrawing()\"></canvas>\r\n    </div>\r\n    <div>\r\n      <button class=\"btn btn-secondary\" (click)=\"clearCanvas()\">Clear</button>\r\n      <button class=\"btn btn-light\" (click)=\"modalSvc.open(helpContent)\"><i class=\"fa fa-question\"></i></button>\r\n    </div>\r\n  </div>\r\n  <div class=\"aip-model-load-overlay\" *ngIf=\"!modelSvc.modelLoaded\">\r\n    <div class=\"text-center\">\r\n      <div>Loading model..</div>\r\n      <div><i class=\"fa fa-spin fa-circle-o-notch\"></i></div>\r\n    </div>\r\n  </div>\r\n</div>\r\n<ng-template #helpContent let-d=\"dismiss\">\r\n  <div class=\"modal-header\">\r\n    <h2 class=\"modal-title\">Don't know what to draw?</h2>\r\n  </div>\r\n  <div class=\"modal-body\">\r\n    <div>Currently we can recognize drawings of these objects:</div>\r\n    <ul>\r\n      <li *ngFor=\"let c of modelSvc.classes\">{{c}}</li>\r\n    </ul>\r\n    <div>We will be adding more object classes in the future.</div>\r\n    <button type=\"button\" class=\"btn btn-secondary\" aria-label=\"Close\" (click)=\"d()\">Close</button>\r\n  </div>\r\n</ng-template>\r\n\r\n"
 
 /***/ }),
 
@@ -540,7 +453,7 @@ exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-b
 
 
 // module
-exports.push([module.i, ":host, md-card {\n  display: inline-block; }\n\ndiv button + button {\n  margin-left: 0.5rem; }\n\ncanvas {\n  border: 1px solid #495057;\n  -webkit-user-select: none;\n     -moz-user-select: none;\n      -ms-user-select: none;\n          user-select: none; }\n  canvas:hover {\n    cursor: crosshair; }\n", ""]);
+exports.push([module.i, ":host {\n  display: inline-block; }\n\ndiv button + button {\n  margin-left: 0.5rem; }\n\ncanvas {\n  border: 1px solid #495057;\n  -webkit-user-select: none;\n     -moz-user-select: none;\n      -ms-user-select: none;\n          user-select: none; }\n  canvas:hover {\n    cursor: crosshair; }\n\n.card {\n  position: relative; }\n  .card .aip-model-load-overlay {\n    position: absolute;\n    top: 0;\n    right: 0;\n    bottom: 0;\n    left: 0;\n    background-color: #f8f9fa; }\n    .card .aip-model-load-overlay > div {\n      position: absolute;\n      top: 50%;\n      left: 50%;\n      -webkit-transform: translate(-50%, -50%);\n              transform: translate(-50%, -50%); }\n", ""]);
 
 // exports
 
@@ -558,7 +471,7 @@ module.exports = module.exports.toString();
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_deeplearn__ = __webpack_require__("../../../../deeplearn/dist/src/index.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_deeplearn___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_deeplearn__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__ng_bootstrap_ng_bootstrap__ = __webpack_require__("../../../../@ng-bootstrap/ng-bootstrap/index.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__sketch_classifier_sketch_classifier_component__ = __webpack_require__("../../../../../src/app/sketch-classification/components/sketch-classifier/sketch-classifier.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__service_sketch_classification_model_service__ = __webpack_require__("../../../../../src/app/sketch-classification/service/sketch-classification-model.service.ts");
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return SketchDrawComponent; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -574,13 +487,11 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 var SketchDrawComponent = (function () {
-    function SketchDrawComponent(modalSvc) {
+    function SketchDrawComponent(modalSvc, modelSvc) {
         this.modalSvc = modalSvc;
+        this.modelSvc = modelSvc;
         this.targetSize = 32;
         this.isDrawing = false;
-        this.supportedClasses = __WEBPACK_IMPORTED_MODULE_3__sketch_classifier_sketch_classifier_component__["a" /* SketchClassifierComponent */].CLASSES;
-        this.aipOnDrawFinished = new __WEBPACK_IMPORTED_MODULE_0__angular_core__["EventEmitter"]();
-        this.aipOnClear = new __WEBPACK_IMPORTED_MODULE_0__angular_core__["EventEmitter"]();
     }
     SketchDrawComponent.prototype.ngAfterViewInit = function () {
         this.ctx = this.canvas.nativeElement.getContext('2d');
@@ -596,7 +507,12 @@ var SketchDrawComponent = (function () {
     SketchDrawComponent.prototype.startDrawing = function (event) {
         this.isDrawing = true;
         this.ctx.beginPath();
-        this.ctx.moveTo(event.offsetX, event.offsetY);
+        if (event instanceof TouchEvent) {
+            var rect = this.canvas.nativeElement.getBoundingClientRect();
+            this.ctx.moveTo(event.touches[0].clientX - rect.left, event.touches[0].clientY - rect.top);
+        }
+        if (event instanceof MouseEvent)
+            this.ctx.moveTo(event.offsetX, event.offsetY);
         this.draw(event);
     };
     /**
@@ -604,8 +520,15 @@ var SketchDrawComponent = (function () {
      * @param {MouseEvent} event
      */
     SketchDrawComponent.prototype.draw = function (event) {
+        event.preventDefault();
         if (this.isDrawing) {
-            this.ctx.lineTo(event.offsetX, event.offsetY);
+            if (event instanceof MouseEvent) {
+                this.ctx.lineTo(event.offsetX, event.offsetY);
+            }
+            if (event instanceof TouchEvent) {
+                var rect = this.canvas.nativeElement.getBoundingClientRect();
+                this.ctx.lineTo(event.touches[0].clientX - rect.left, event.touches[0].clientY - rect.top);
+            }
             this.ctx.stroke();
         }
     };
@@ -616,9 +539,9 @@ var SketchDrawComponent = (function () {
     SketchDrawComponent.prototype.stopDrawing = function () {
         if (this.isDrawing) {
             this.isDrawing = false;
-            var scaled = this.scaleImageDataToTargetSize();
-            this.aipOnDrawFinished.emit(this.normalizeToBWImageData(scaled));
             this.ctx.closePath();
+            var scaled = this.scaleImageDataToTargetSize();
+            this.modelSvc.predict(this.normalizeToBWImageData(scaled));
         }
     };
     /**
@@ -626,7 +549,7 @@ var SketchDrawComponent = (function () {
      */
     SketchDrawComponent.prototype.clearCanvas = function () {
         this.ctx.clearRect(0, 0, this.canvas.nativeElement.width, this.canvas.nativeElement.height);
-        this.aipOnClear.emit();
+        this.modelSvc.clearScores();
     };
     /**
      * scale image to target size and return image data
@@ -667,24 +590,16 @@ __decorate([
     __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["ViewChild"])('drawCanvas'),
     __metadata("design:type", typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_0__angular_core__["ElementRef"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_0__angular_core__["ElementRef"]) === "function" && _a || Object)
 ], SketchDrawComponent.prototype, "canvas", void 0);
-__decorate([
-    __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Output"])(),
-    __metadata("design:type", Object)
-], SketchDrawComponent.prototype, "aipOnDrawFinished", void 0);
-__decorate([
-    __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Output"])(),
-    __metadata("design:type", Object)
-], SketchDrawComponent.prototype, "aipOnClear", void 0);
 SketchDrawComponent = __decorate([
     __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
         selector: 'aip-sketch-draw',
         template: __webpack_require__("../../../../../src/app/sketch-classification/components/sketch-draw/sketch-draw.component.html"),
         styles: [__webpack_require__("../../../../../src/app/sketch-classification/components/sketch-draw/sketch-draw.component.scss")]
     }),
-    __metadata("design:paramtypes", [typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_2__ng_bootstrap_ng_bootstrap__["b" /* NgbModal */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__ng_bootstrap_ng_bootstrap__["b" /* NgbModal */]) === "function" && _b || Object])
+    __metadata("design:paramtypes", [typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_2__ng_bootstrap_ng_bootstrap__["b" /* NgbModal */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__ng_bootstrap_ng_bootstrap__["b" /* NgbModal */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_3__service_sketch_classification_model_service__["a" /* SketchClassificationModelService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__service_sketch_classification_model_service__["a" /* SketchClassificationModelService */]) === "function" && _c || Object])
 ], SketchDrawComponent);
 
-var _a, _b;
+var _a, _b, _c;
 //# sourceMappingURL=sketch-draw.component.js.map
 
 /***/ }),
@@ -719,7 +634,6 @@ module.exports = module.exports.toString();
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/@angular/core.es5.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__sketch_classifier_sketch_classifier_component__ = __webpack_require__("../../../../../src/app/sketch-classification/components/sketch-classifier/sketch-classifier.component.ts");
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return SketchRootComponent; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -731,29 +645,11 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 
-
 var SketchRootComponent = (function () {
     function SketchRootComponent() {
     }
-    /**
-     * method to redirect data to classifier
-     * @param {Array<any>} data
-     */
-    SketchRootComponent.prototype.predict = function (data) {
-        this.classifier.predict(data);
-    };
-    /**
-     * clear classifier scores
-     */
-    SketchRootComponent.prototype.clearScores = function () {
-        this.classifier.clearScores();
-    };
     return SketchRootComponent;
 }());
-__decorate([
-    __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["ViewChild"])(__WEBPACK_IMPORTED_MODULE_1__sketch_classifier_sketch_classifier_component__["a" /* SketchClassifierComponent */]),
-    __metadata("design:type", typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__sketch_classifier_sketch_classifier_component__["a" /* SketchClassifierComponent */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__sketch_classifier_sketch_classifier_component__["a" /* SketchClassifierComponent */]) === "function" && _a || Object)
-], SketchRootComponent.prototype, "classifier", void 0);
 SketchRootComponent = __decorate([
     __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
         selector: 'aip-sketch-root',
@@ -763,8 +659,189 @@ SketchRootComponent = __decorate([
     __metadata("design:paramtypes", [])
 ], SketchRootComponent);
 
-var _a;
 //# sourceMappingURL=sketch-root.component.js.map
+
+/***/ }),
+
+/***/ "../../../../../src/app/sketch-classification/service/sketch-classification-model.service.ts":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/@angular/core.es5.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_deeplearn__ = __webpack_require__("../../../../deeplearn/dist/src/index.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_deeplearn___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_deeplearn__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_deeplearn_dist_src_util__ = __webpack_require__("../../../../deeplearn/dist/src/util.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_deeplearn_dist_src_util___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_deeplearn_dist_src_util__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return SketchClassificationModelService; });
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+
+var SketchClassificationModelService = (function () {
+    function SketchClassificationModelService() {
+        this._modelLoaded = false;
+        this.g = new __WEBPACK_IMPORTED_MODULE_1_deeplearn__["Graph"]();
+        this._predictionFinished = new __WEBPACK_IMPORTED_MODULE_0__angular_core__["EventEmitter"]();
+        this._classes = [
+            'Circle',
+            'Square',
+            'Line',
+            'Baseball',
+            'Apple',
+            'Door',
+            'Book',
+            'Triangle',
+            'Hexagon',
+            'Octagon',
+            'Laptop',
+            'Pizza',
+            'Envelope',
+            'Clock',
+            'Camera',
+            'Face'
+        ];
+        this._classScores = [];
+        this._hasScores = false;
+        try {
+            this.math = new __WEBPACK_IMPORTED_MODULE_1_deeplearn__["NDArrayMathGPU"]();
+            console.debug('using gpu');
+        }
+        catch (err) {
+            console.debug(err);
+            console.debug('using cpu');
+            this.math = new __WEBPACK_IMPORTED_MODULE_1_deeplearn__["NDArrayMathCPU"]();
+        }
+    }
+    /**
+     * initialize model graph and load model weights
+     * @returns {Promise<any>}
+     */
+    SketchClassificationModelService.prototype.loadModel = function () {
+        var _this = this;
+        var varLoader = new __WEBPACK_IMPORTED_MODULE_1_deeplearn__["CheckpointLoader"](document.head.baseURI + 'assets/deeplearn/sketch_classification/');
+        this.modelReady = new Promise(function (resolve, reject) {
+            varLoader.getAllVariables().then(function (vars) {
+                _this.inputTensor = _this.g.placeholder('input', [32, 32, 1]);
+                var conv1 = _this.g.conv2d(_this.inputTensor, _this.g.constant(vars['conv2d_1/kernel']), _this.g.constant(vars['conv2d_1/bias']), 3, 32, 1, 1);
+                var conv1_relu = _this.g.relu(conv1);
+                var conv2 = _this.g.conv2d(conv1_relu, _this.g.constant(vars['conv2d_2/kernel']), _this.g.constant(vars['conv2d_2/bias']), 3, 32, 1, 1);
+                var conv2_relu = _this.g.relu(conv2);
+                var conv3 = _this.g.conv2d(conv2_relu, _this.g.constant(vars['conv2d_3/kernel']), _this.g.constant(vars['conv2d_3/bias']), 3, 32, 1, 1);
+                var conv3_relu = _this.g.relu(conv3);
+                var maxPool1 = _this.g.maxPool(conv3_relu, 2, 2, 0);
+                var conv4 = _this.g.conv2d(maxPool1, _this.g.constant(vars['conv2d_4/kernel']), _this.g.constant(vars['conv2d_4/bias']), 3, 64, 1, 1);
+                var conv4_relu = _this.g.relu(conv4);
+                var conv5 = _this.g.conv2d(conv4_relu, _this.g.constant(vars['conv2d_5/kernel']), _this.g.constant(vars['conv2d_5/bias']), 3, 64, 1, 1);
+                var conv5_relu = _this.g.relu(conv5);
+                var conv6 = _this.g.conv2d(conv5_relu, _this.g.constant(vars['conv2d_6/kernel']), _this.g.constant(vars['conv2d_6/bias']), 3, 64, 1, 1);
+                var conv6_relu = _this.g.relu(conv6);
+                var maxPool2 = _this.g.maxPool(conv6_relu, 2, 2, 0);
+                var conv7 = _this.g.conv2d(maxPool2, _this.g.constant(vars['conv2d_7/kernel']), _this.g.constant(vars['conv2d_7/bias']), 3, 128, 1, 1);
+                var conv7_relu = _this.g.relu(conv7);
+                var conv8 = _this.g.conv2d(conv7_relu, _this.g.constant(vars['conv2d_8/kernel']), _this.g.constant(vars['conv2d_8/bias']), 3, 128, 1, 1);
+                var conv8_relu = _this.g.relu(conv8);
+                var conv9 = _this.g.conv2d(conv8_relu, _this.g.constant(vars['conv2d_9/kernel']), _this.g.constant(vars['conv2d_9/bias']), 3, 128, 1, 1);
+                var conv9_relu = _this.g.relu(conv9);
+                var maxPool3 = _this.g.maxPool(conv9_relu, 2, 2, 0);
+                var reshape = _this.g.reshape(maxPool3, [__webpack_require__.i(__WEBPACK_IMPORTED_MODULE_2_deeplearn_dist_src_util__["sizeFromShape"])(maxPool3.shape)]);
+                var dense1 = _this.g.layers.dense('dense1', reshape, 512, null, true, new __WEBPACK_IMPORTED_MODULE_1_deeplearn__["NDArrayInitializer"](vars['dense_1/kernel']), new __WEBPACK_IMPORTED_MODULE_1_deeplearn__["NDArrayInitializer"](vars['dense_1/bias']));
+                var dense1_relu = _this.g.relu(dense1);
+                var dense2 = _this.g.layers.dense('dense2', dense1_relu, 512, null, true, new __WEBPACK_IMPORTED_MODULE_1_deeplearn__["NDArrayInitializer"](vars['dense_2/kernel']), new __WEBPACK_IMPORTED_MODULE_1_deeplearn__["NDArrayInitializer"](vars['dense_2/bias']));
+                var dense2_relu = _this.g.relu(dense2);
+                var dense3 = _this.g.layers.dense('dense3', dense2_relu, 16, null, true, new __WEBPACK_IMPORTED_MODULE_1_deeplearn__["NDArrayInitializer"](vars['dense_3/kernel']), new __WEBPACK_IMPORTED_MODULE_1_deeplearn__["NDArrayInitializer"](vars['dense_3/bias']));
+                _this.predictionTensor = _this.g.softmax(dense3);
+                _this._modelLoaded = true;
+                resolve();
+            }).catch(function (err) {
+                reject(err);
+            });
+        });
+    };
+    /**
+     * let the model predict
+     * @param data
+     */
+    SketchClassificationModelService.prototype.predict = function (data) {
+        var _this = this;
+        this._classScores = [];
+        this.modelReady.then(function () {
+            var sess = new __WEBPACK_IMPORTED_MODULE_1_deeplearn__["Session"](_this.g, _this.math);
+            _this.math.scope(function (keep, track) {
+                var mapping = [{
+                        tensor: _this.inputTensor,
+                        data: data
+                    }];
+                var result = sess.eval(_this.predictionTensor, mapping);
+                var tmpClassScores = [];
+                result.getValues().forEach(function (score, index) {
+                    tmpClassScores.push(Math.round(score * 100));
+                });
+                _this._classScores = tmpClassScores;
+                _this._hasScores = true;
+                _this.predictionFinished.emit();
+            });
+        }).catch(function (error) {
+            console.debug(error);
+        });
+    };
+    /**
+     * clear the class scores to prevent from displaying
+     */
+    SketchClassificationModelService.prototype.clearScores = function () {
+        this._hasScores = false;
+    };
+    Object.defineProperty(SketchClassificationModelService.prototype, "classes", {
+        // getter
+        get: function () {
+            return this._classes;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(SketchClassificationModelService.prototype, "classScores", {
+        get: function () {
+            return this._classScores;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(SketchClassificationModelService.prototype, "hasScores", {
+        get: function () {
+            return this._hasScores;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(SketchClassificationModelService.prototype, "modelLoaded", {
+        get: function () {
+            return this._modelLoaded;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(SketchClassificationModelService.prototype, "predictionFinished", {
+        get: function () {
+            return this._predictionFinished;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    return SketchClassificationModelService;
+}());
+SketchClassificationModelService = __decorate([
+    __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Injectable"])(),
+    __metadata("design:paramtypes", [])
+], SketchClassificationModelService);
+
+//# sourceMappingURL=sketch-classification-model.service.js.map
 
 /***/ }),
 
@@ -824,6 +901,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_ng2_charts__ = __webpack_require__("../../../../ng2-charts/index.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_ng2_charts___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_6_ng2_charts__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__ng_bootstrap_ng_bootstrap__ = __webpack_require__("../../../../@ng-bootstrap/ng-bootstrap/index.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__service_sketch_classification_model_service__ = __webpack_require__("../../../../../src/app/sketch-classification/service/sketch-classification-model.service.ts");
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SketchClassificationModule", function() { return SketchClassificationModule; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -831,6 +909,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
+
 
 
 
@@ -857,6 +936,9 @@ SketchClassificationModule = __decorate([
             __WEBPACK_IMPORTED_MODULE_3__components_sketch_root_sketch_root_component__["a" /* SketchRootComponent */],
             __WEBPACK_IMPORTED_MODULE_5__components_sketch_classifier_sketch_classifier_component__["a" /* SketchClassifierComponent */],
         ],
+        providers: [
+            __WEBPACK_IMPORTED_MODULE_8__service_sketch_classification_model_service__["a" /* SketchClassificationModelService */]
+        ]
     })
 ], SketchClassificationModule);
 
