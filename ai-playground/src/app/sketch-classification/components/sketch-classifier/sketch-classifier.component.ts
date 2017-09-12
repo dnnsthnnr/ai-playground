@@ -126,7 +126,7 @@ export class SketchClassifierComponent implements OnInit {
    * @returns {Promise<any>}
    */
   private loadModel() {
-    const varLoader = new CheckpointLoader('/assets/deeplearn/sketch_classification/');
+    const varLoader = new CheckpointLoader(document.head.baseURI + 'assets/deeplearn/sketch_classification/');
     return new Promise((resolve, reject) => {
       varLoader.getAllVariables().then(vars => {
         this.inputTensor = this.g.placeholder('input', [32, 32, 1]);
