@@ -2,25 +2,33 @@
   <div class="card-body">
     <div><h2>Draw Something!</h2>
       <canvas #drawCanvas [width]="10 * targetSize" [height]="10 * targetSize"
-              (mousedown)="startDrawing($event)" (mousemove)="draw($event)" (mouseleave)="stopDrawing()"
-              (mouseup)="stopDrawing()"></canvas>
+              (mousedown)="startDrawing($event)" (touchstart)="startDrawing($event)" (mousemove)="draw($event)"
+              (touchmove)="draw($event)" (mouseleave)="stopDrawing()"
+              (mouseup)="stopDrawing()" (touchend)="stopDrawing()"></canvas>
     </div>
     <div>
       <button class="btn btn-secondary" (click)="clearCanvas()">Clear</button>
       <button class="btn btn-light" (click)="modalSvc.open(helpContent)"><i class="fa fa-question"></i></button>
     </div>
   </div>
+  <div class="aip-model-load-overlay" *ngIf="!modelSvc.modelLoaded">
+    <div class="text-center">
+      <div>Loading model..</div>
+      <div><i class="fa fa-spin fa-circle-o-notch"></i></div>
+    </div>
+  </div>
 </div>
-<ng-template #helpContent>
+<ng-template #helpContent let-d="dismiss">
   <div class="modal-header">
-    <h2>Don't know what to draw?</h2>
+    <h2 class="modal-title">Don't know what to draw?</h2>
   </div>
   <div class="modal-body">
     <div>Currently we can recognize drawings of these objects:</div>
     <ul>
-      <li *ngFor="let c of supportedClasses">{{c}}</li>
+      <li *ngFor="let c of modelSvc.classes">{{c}}</li>
     </ul>
     <div>We will be adding more object classes in the future.</div>
+    <button type="button" class="btn btn-secondary" aria-label="Close" (click)="d()">Close</button>
   </div>
 </ng-template>
 

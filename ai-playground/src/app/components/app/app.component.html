@@ -1,4 +1,4 @@
-<header>
+<header #header>
   <button class="btn btn-primary" (click)="isCollapsed = !isCollapsed; $event.stopPropagation();"><i
     class="fa fa-bars"></i></button>
   <div class="navbar-brand">AI Playground</div>
@@ -13,4 +13,6 @@
     <a class="list-group-item" routerLink="/roadmap" routerLinkActive="aip-active">Roadmap</a>
   </div>
 </nav>
-<router-outlet></router-outlet>
+<div [style.marginTop]="getHeaderHeight()">
+  <router-outlet></router-outlet>
+</div>

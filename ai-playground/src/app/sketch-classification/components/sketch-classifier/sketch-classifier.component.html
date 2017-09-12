@@ -1,16 +1,13 @@
-<div *ngIf="!modelLoaded">
-  <ngb-progressbar mode="indeterminate"></ngb-progressbar>
-</div>
-<ng-container *ngIf="modelLoaded">
+<ng-container *ngIf="modelSvc.modelLoaded">
   <div class="card">
     <div class="aip-chart-container card-body">
-      <canvas baseChart chartType="doughnut" width="320" height="320" [labels]="classes" [data]="classScores"
+      <canvas baseChart chartType="doughnut" width="320" height="320" [labels]="modelSvc.classes" [data]="modelSvc.classScores"
               [legend]="false" [colors]="colors"></canvas>
-      <div class="aip-classifier-result" *ngIf="classScores.length">
+      <div class="aip-classifier-result" *ngIf="modelSvc.classScores.length">
         I think it's a <b>{{getMaxClass()}}</b>
       </div>
     </div>
-    <div class="aip-sketch-wait-overlay" [@fadeInOut]="classScores.length > 0 && hasScores ? 'invisible' : 'visible'">
+    <div class="aip-sketch-wait-overlay" [@fadeInOut]="modelSvc.classScores.length > 0 && modelSvc.hasScores ? 'invisible' : 'visible'">
       <div>
         <b>Waiting for You to draw something beautiful ;-)</b>
       </div>

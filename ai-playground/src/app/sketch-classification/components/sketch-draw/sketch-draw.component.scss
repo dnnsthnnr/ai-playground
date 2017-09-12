@@ -1,11 +1,10 @@
 @import "../../../../_bootstrap-config";
 
-:host, md-card {
+:host {
   display: inline-block;
 }
 
 div {
-
   button + button {
     margin-left: 0.5rem;
   }
@@ -16,5 +15,21 @@ canvas {
   user-select: none;
   &:hover {
     cursor: crosshair;
+  }
+}
+
+.card {
+  position: relative;
+  .aip-model-load-overlay {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background-color: $gray-100;
+
+    & > div {
+      @include center-absolute;
+    }
   }
 }
