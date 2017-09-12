@@ -1,9 +1,4 @@
 import {AfterViewInit, Component, ElementRef, OnInit} from '@angular/core';
-import {
-  Array3D, CheckpointLoader, Graph, NDArrayInitializer, NDArrayMath, NDArrayMathCPU, NDArrayMathGPU, Session,
-  Tensor
-} from 'deeplearn';
-import {sizeFromShape} from 'deeplearn/dist/src/util';
 import 'rxjs/add/observable/of';
 import {fadeInOutAnimation} from '../../../animations';
 import {SketchClassificationModelService} from '../../service/sketch-classification-model.service';

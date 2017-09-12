@@ -1,7 +1,6 @@
-import {AfterViewInit, Component, ElementRef, EventEmitter, Output, ViewChild} from '@angular/core';
+import {AfterViewInit, Component, ElementRef, ViewChild} from '@angular/core';
 import {Array3D} from 'deeplearn';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
-import {SketchClassifierComponent} from '../sketch-classifier/sketch-classifier.component';
 import {SketchClassificationModelService} from '../../service/sketch-classification-model.service';
 
 
@@ -37,16 +36,16 @@ export class SketchDrawComponent implements AfterViewInit {
    * start drawing
    * @param {MouseEvent} event
    */
-  startDrawing(event: MouseEvent| TouchEvent) {
+  startDrawing(event: MouseEvent | TouchEvent) {
     this.isDrawing = true;
     this.ctx.beginPath();
 
-    if(event instanceof TouchEvent) {
+    if (event instanceof TouchEvent) {
       let rect = this.canvas.nativeElement.getBoundingClientRect();
       this.ctx.moveTo(event.touches[0].clientX - rect.left, event.touches[0].clientY - rect.top)
     }
 
-    if (event instanceof  MouseEvent)
+    if (event instanceof MouseEvent)
       this.ctx.moveTo(event.offsetX, event.offsetY);
     this.draw(event);
   }
@@ -59,11 +58,11 @@ export class SketchDrawComponent implements AfterViewInit {
     event.preventDefault();
     if (this.isDrawing) {
 
-      if(event instanceof MouseEvent) {
+      if (event instanceof MouseEvent) {
         this.ctx.lineTo(event.offsetX, event.offsetY);
       }
 
-      if(event instanceof TouchEvent) {
+      if (event instanceof TouchEvent) {
         let rect = this.canvas.nativeElement.getBoundingClientRect();
         this.ctx.lineTo(event.touches[0].clientX - rect.left, event.touches[0].clientY - rect.top)
       }
@@ -80,9 +79,16 @@ export class SketchDrawComponent implements AfterViewInit {
     if (this.isDrawing) {
       this.isDrawing = false;
       this.ctx.closePath();
-      let scaled = this.scaleImageDataToTargetSize();
 
-      this.modelSvc.predict(this.normalizeToBWImageData(scaled))
+      // wait until drawing is completely finished
+      window.setTimeout(() => {
+        if (!this.isDrawing) {
+          let scaled = this.scaleImageDataToTargetSize();
+
+          this.modelSvc.predict(this.normalizeToBWImageData(scaled))
+        }
+      }, 500)
+
     }
   }
 
