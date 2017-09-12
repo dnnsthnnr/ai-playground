@@ -1,0 +1,57 @@
+@import "../../../_bootstrap-config";
+
+.aip-title {
+  padding: 3rem;
+  text-align: center;
+  background-color: theme-color("secondary");
+  color: $gray-300;
+
+  .aip-uppercase-let {
+    display: block;
+    font-weight: bold;
+    font-size: 500%;
+  }
+}
+
+.aip-sidenav {
+  position: fixed;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  background-color: $body-bg;
+  box-shadow: 3px 0 6px rgba(0, 0, 0, .24);
+  padding: $spacer 0;
+
+  .list-group {
+    .list-group-item {
+      padding: $spacer*.75 $spacer*2;
+      &.list-group-item-light {
+        padding-left: $spacer;
+      }
+    }
+
+    a {
+      color: $body-color;
+
+      &.aip-active {
+        background-color: theme-color("primary");
+        color: $body-bg;
+      }
+    }
+  }
+
+}
+
+header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  background-color: theme-color("primary");
+  color: $gray-300;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, .24);
+  padding: $spacer /2;
+  button {
+    box-shadow: none;
+  }
+}

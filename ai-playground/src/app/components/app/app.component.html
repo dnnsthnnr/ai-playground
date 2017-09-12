@@ -1,0 +1,16 @@
+<header>
+  <button class="btn btn-primary" (click)="isCollapsed = !isCollapsed; $event.stopPropagation();"><i
+    class="fa fa-bars"></i></button>
+  <div class="navbar-brand">AI Playground</div>
+</header>
+<nav class="aip-sidenav" [ngbCollapse]="isCollapsed">
+  <div class="list-group">
+    <div class="list-group-item list-group-item-light">Demos</div>
+    <a class="list-group-item" routerLink="/sketch" routerLinkActive="aip-active">Draw Sketch</a>
+  </div>
+  <div class="list-group">
+    <div class="list-group-item list-group-item-light">Info</div>
+    <a class="list-group-item" routerLink="/roadmap" routerLinkActive="aip-active">Roadmap</a>
+  </div>
+</nav>
+<router-outlet></router-outlet>

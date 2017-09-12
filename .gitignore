@@ -1,0 +1,13 @@
+# IDE
+/.idea
+.project
+.classpath
+.c9/
+*.launch
+.settings/
+*.sublime-workspace
+
+/deeplearn_data/
+/data/**
+/model/**
+!model/*.hdf5
