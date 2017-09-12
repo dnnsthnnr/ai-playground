@@ -411,7 +411,7 @@ var SketchClassifierComponent = SketchClassifierComponent_1 = (function () {
      */
     SketchClassifierComponent.prototype.loadModel = function () {
         var _this = this;
-        var varLoader = new __WEBPACK_IMPORTED_MODULE_1_deeplearn__["CheckpointLoader"]('/assets/deeplearn/sketch_classification/');
+        var varLoader = new __WEBPACK_IMPORTED_MODULE_1_deeplearn__["CheckpointLoader"](document.head.baseURI + 'assets/deeplearn/sketch_classification/');
         return new Promise(function (resolve, reject) {
             varLoader.getAllVariables().then(function (vars) {
                 _this.inputTensor = _this.g.placeholder('input', [32, 32, 1]);
