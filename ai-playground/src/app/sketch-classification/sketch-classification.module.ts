@@ -6,6 +6,7 @@ import {SketchClassificationRoutingModule} from './sketch-classification-routing
 import {SketchClassifierComponent} from './components/sketch-classifier/sketch-classifier.component';
 import {ChartsModule} from 'ng2-charts';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import {SketchClassificationModelService} from './service/sketch-classification-model.service';
 
 @NgModule({
   imports: [
@@ -20,6 +21,11 @@ import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
     SketchRootComponent,
     SketchClassifierComponent,
   ],
+  providers: [
+    SketchClassificationModelService
+  ]
 })
 export class SketchClassificationModule {
+
+
 }

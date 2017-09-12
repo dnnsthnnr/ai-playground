@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {AfterViewInit, Component, ElementRef, OnInit} from '@angular/core';
 import {
   Array3D, CheckpointLoader, Graph, NDArrayInitializer, NDArrayMath, NDArrayMathCPU, NDArrayMathGPU, Session,
   Tensor
@@ -6,6 +6,7 @@ import {
 import {sizeFromShape} from 'deeplearn/dist/src/util';
 import 'rxjs/add/observable/of';
 import {fadeInOutAnimation} from '../../../animations';
+import {SketchClassificationModelService} from '../../service/sketch-classification-model.service';
 
 
 @Component({
@@ -16,28 +17,7 @@ import {fadeInOutAnimation} from '../../../animations';
     fadeInOutAnimation
   ]
 })
-export class SketchClassifierComponent implements OnInit {
-
-  private g: Graph = new Graph();
-
-  public static CLASSES = [
-    'Circle',
-    'Square',
-    'Line',
-    'Baseball',
-    'Apple',
-    'Door',
-    'Book',
-    'Triangle',
-    'Hexagon',
-    'Octagon',
-    'Laptop',
-    'Pizza',
-    'Envelope',
-    'Clock',
-    'Camera',
-    'Face'
-  ];
+export class SketchClassifierComponent implements OnInit, AfterViewInit {
 
   private colors = [
     {
@@ -90,135 +70,34 @@ export class SketchClassifierComponent implements OnInit {
     },
   ];
 
-  private classes = SketchClassifierComponent.CLASSES;
 
-  private classScores = [];
-
-  private hasScores = false;
-
-  private modelReady: Promise<any>;
-  private modelLoaded = false;
-
-  private predictionTensor: Tensor;
-  private inputTensor: Tensor;
-
-  private math: NDArrayMath;
-
-  constructor() {
+  constructor(public modelSvc: SketchClassificationModelService, private host: ElementRef) {
+    console.debug(this.host);
   }
 
   ngOnInit() {
-
-    try {
-      this.math = new NDArrayMathGPU();
-      console.debug('using gpu')
-    } catch (err) {
-      console.debug(err);
-      console.debug('using cpu');
-      this.math = new NDArrayMathCPU();
-    }
-
-    this.modelReady = this.loadModel();
+    this.modelSvc.loadModel();
   }
 
-  /**
-   * initialize model graph and load model weights
-   * @returns {Promise<any>}
-   */
-  private loadModel() {
-    const varLoader = new CheckpointLoader(document.head.baseURI + 'assets/deeplearn/sketch_classification/');
-    return new Promise((resolve, reject) => {
-      varLoader.getAllVariables().then(vars => {
-        this.inputTensor = this.g.placeholder('input', [32, 32, 1]);
-        const conv1 = this.g.conv2d(this.inputTensor, this.g.constant(vars['conv2d_1/kernel']), this.g.constant(vars['conv2d_1/bias']), 3, 32, 1, 1);
-        const conv1_relu = this.g.relu(conv1);
-        const conv2 = this.g.conv2d(conv1_relu, this.g.constant(vars['conv2d_2/kernel']), this.g.constant(vars['conv2d_2/bias']), 3, 32, 1, 1);
-        const conv2_relu = this.g.relu(conv2);
-        const conv3 = this.g.conv2d(conv2_relu, this.g.constant(vars['conv2d_3/kernel']), this.g.constant(vars['conv2d_3/bias']), 3, 32, 1, 1);
-        const conv3_relu = this.g.relu(conv3);
-        const maxPool1 = this.g.maxPool(conv3_relu, 2, 2, 0);
+  ngAfterViewInit() {
+    this.modelSvc.predictionFinished.subscribe(() => {
+      let box = this.host.nativeElement.getBoundingClientRect();
 
-        const conv4 = this.g.conv2d(maxPool1, this.g.constant(vars['conv2d_4/kernel']), this.g.constant(vars['conv2d_4/bias']), 3, 64, 1, 1);
-        const conv4_relu = this.g.relu(conv4);
-        const conv5 = this.g.conv2d(conv4_relu, this.g.constant(vars['conv2d_5/kernel']), this.g.constant(vars['conv2d_5/bias']), 3, 64, 1, 1);
-        const conv5_relu = this.g.relu(conv5);
-        const conv6 = this.g.conv2d(conv5_relu, this.g.constant(vars['conv2d_6/kernel']), this.g.constant(vars['conv2d_6/bias']), 3, 64, 1, 1);
-        const conv6_relu = this.g.relu(conv6);
-        const maxPool2 = this.g.maxPool(conv6_relu, 2, 2, 0);
-
-        const conv7 = this.g.conv2d(maxPool2, this.g.constant(vars['conv2d_7/kernel']), this.g.constant(vars['conv2d_7/bias']), 3, 128, 1, 1);
-        const conv7_relu = this.g.relu(conv7);
-        const conv8 = this.g.conv2d(conv7_relu, this.g.constant(vars['conv2d_8/kernel']), this.g.constant(vars['conv2d_8/bias']), 3, 128, 1, 1);
-        const conv8_relu = this.g.relu(conv8);
-        const conv9 = this.g.conv2d(conv8_relu, this.g.constant(vars['conv2d_9/kernel']), this.g.constant(vars['conv2d_9/bias']), 3, 128, 1, 1);
-        const conv9_relu = this.g.relu(conv9);
-        const maxPool3 = this.g.maxPool(conv9_relu, 2, 2, 0);
-
-        const reshape = this.g.reshape(maxPool3, [sizeFromShape(maxPool3.shape)]);
-        const dense1 = this.g.layers.dense('dense1', reshape, 512, null, true, new NDArrayInitializer(vars['dense_1/kernel']), new NDArrayInitializer(vars['dense_1/bias']));
-        const dense1_relu = this.g.relu(dense1);
-        const dense2 = this.g.layers.dense('dense2', dense1_relu, 512, null, true, new NDArrayInitializer(vars['dense_2/kernel']), new NDArrayInitializer(vars['dense_2/bias']));
-        const dense2_relu = this.g.relu(dense2);
-        const dense3 = this.g.layers.dense('dense3', dense2_relu, 16, null, true, new NDArrayInitializer(vars['dense_3/kernel']), new NDArrayInitializer(vars['dense_3/bias']));
-        this.predictionTensor = this.g.softmax(dense3);
-
-        this.modelLoaded = true;
-
-        resolve()
-      }).catch((err) => {
-        reject(err);
-      })
+      // if less than half the host is visible scroll it into view TODO animate scrolling
+      if (box.top > window.innerHeight - (box.bottom - box.top) / 2)
+        this.host.nativeElement.scrollIntoView(true);
     })
   }
 
-  /**
-   * let the model predict
-   * @param data
-   */
-  predict(data: Array3D) {
-    this.classScores = [];
-
-    this.modelReady.then(() => {
-
-      const sess = new Session(this.g, this.math);
-
-      this.math.scope((keep, track) => {
-        const mapping = [{
-          tensor: this.inputTensor,
-          data: data
-        }];
-
-        const result = sess.eval(this.predictionTensor, mapping);
-
-        let tmpClassScores = [];
-        result.getValues().forEach((score, index) => {
-          tmpClassScores.push(Math.round(score * 100));
-        });
-
-
-        this.classScores = tmpClassScores;
-        this.hasScores = true;
-
-      })
-
-    }).catch(error => {
-      console.debug(error)
-    })
-
-  }
 
   /**
    * get the current lead class name
    * @returns {string}
    */
   getMaxClass(): string {
-    let max = Math.max(...this.classScores);
-    let idx = this.classScores.indexOf(max);
-    return this.classes[idx];
+    let max = Math.max(...this.modelSvc.classScores);
+    let idx = this.modelSvc.classScores.indexOf(max);
+    return this.modelSvc.classes[idx];
   }
 
-
-  clearScores() {
-    this.hasScores = false;
-  }
 }

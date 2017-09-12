@@ -21,6 +21,7 @@
   background-color: $body-bg;
   box-shadow: 3px 0 6px rgba(0, 0, 0, .24);
   padding: $spacer 0;
+  z-index: 1000;
 
   .list-group {
     .list-group-item {
@@ -51,6 +52,7 @@ header {
   color: $gray-300;
   box-shadow: 0 3px 6px rgba(0, 0, 0, .24);
   padding: $spacer /2;
+  z-index: 999;
   button {
     box-shadow: none;
   }

@@ -2,6 +2,7 @@ import {AfterViewInit, Component, ElementRef, EventEmitter, Output, ViewChild} f
 import {Array3D} from 'deeplearn';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {SketchClassifierComponent} from '../sketch-classifier/sketch-classifier.component';
+import {SketchClassificationModelService} from '../../service/sketch-classification-model.service';
 
 
 @Component({
@@ -20,15 +21,7 @@ export class SketchDrawComponent implements AfterViewInit {
 
   private isDrawing = false;
 
-  private supportedClasses = SketchClassifierComponent.CLASSES;
-
-  @Output()
-  private aipOnDrawFinished = new EventEmitter();
-
-  @Output()
-  private aipOnClear = new EventEmitter();
-
-  constructor(private modalSvc: NgbModal) {
+  constructor(public modalSvc: NgbModal, public modelSvc: SketchClassificationModelService) {
   }
 
   ngAfterViewInit() {
@@ -44,10 +37,17 @@ export class SketchDrawComponent implements AfterViewInit {
    * start drawing
    * @param {MouseEvent} event
    */
-  startDrawing(event: MouseEvent) {
+  startDrawing(event: MouseEvent| TouchEvent) {
     this.isDrawing = true;
     this.ctx.beginPath();
-    this.ctx.moveTo(event.offsetX, event.offsetY);
+
+    if(event instanceof TouchEvent) {
+      let rect = this.canvas.nativeElement.getBoundingClientRect();
+      this.ctx.moveTo(event.touches[0].clientX - rect.left, event.touches[0].clientY - rect.top)
+    }
+
+    if (event instanceof  MouseEvent)
+      this.ctx.moveTo(event.offsetX, event.offsetY);
     this.draw(event);
   }
 
@@ -55,9 +55,19 @@ export class SketchDrawComponent implements AfterViewInit {
    * draw line according to mouse position
    * @param {MouseEvent} event
    */
-  draw(event: MouseEvent) {
+  draw(event: MouseEvent | TouchEvent) {
+    event.preventDefault();
     if (this.isDrawing) {
-      this.ctx.lineTo(event.offsetX, event.offsetY);
+
+      if(event instanceof MouseEvent) {
+        this.ctx.lineTo(event.offsetX, event.offsetY);
+      }
+
+      if(event instanceof TouchEvent) {
+        let rect = this.canvas.nativeElement.getBoundingClientRect();
+        this.ctx.lineTo(event.touches[0].clientX - rect.left, event.touches[0].clientY - rect.top)
+      }
+
       this.ctx.stroke();
     }
   }
@@ -69,9 +79,10 @@ export class SketchDrawComponent implements AfterViewInit {
   stopDrawing() {
     if (this.isDrawing) {
       this.isDrawing = false;
-      let scaled = this.scaleImageDataToTargetSize();
-      this.aipOnDrawFinished.emit(this.normalizeToBWImageData(scaled));
       this.ctx.closePath();
+      let scaled = this.scaleImageDataToTargetSize();
+
+      this.modelSvc.predict(this.normalizeToBWImageData(scaled))
     }
   }
 
@@ -80,7 +91,8 @@ export class SketchDrawComponent implements AfterViewInit {
    */
   clearCanvas() {
     this.ctx.clearRect(0, 0, this.canvas.nativeElement.width, this.canvas.nativeElement.height);
-    this.aipOnClear.emit();
+
+    this.modelSvc.clearScores()
   }
 
   /**
