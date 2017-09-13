@@ -20,6 +20,8 @@ export class SketchDrawComponent implements AfterViewInit {
 
   private isDrawing = false;
 
+  private waringDisplayed = true;
+
   constructor(public modalSvc: NgbModal, public modelSvc: SketchClassificationModelService) {
   }
 

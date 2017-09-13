@@ -20,6 +20,12 @@ canvas {
 
 .card {
   position: relative;
+
+  ngb-alert {
+    display: block;
+    width: 320px;
+  }
+
   .aip-model-load-overlay {
     position: absolute;
     top: 0;
