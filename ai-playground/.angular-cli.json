@@ -23,6 +23,7 @@
         "styles.scss"
       ],
       "scripts": [
+        "../node_modules/matter-js/build/matter.js"
       ],
       "environmentSource": "environments/environment.ts",
       "environments": {

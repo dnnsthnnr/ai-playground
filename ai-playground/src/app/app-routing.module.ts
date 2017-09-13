@@ -19,6 +19,10 @@ import {AppComponent} from './components/app/app.component';
             loadChildren: 'app/sketch-classification/sketch-classification.module#SketchClassificationModule'
           },
           {
+            path: 'collision-avoidance',
+            loadChildren: 'app/collision-avoidance/collision-avoidance.module#CollisionAvoidanceModule'
+          },
+          {
             path: '**',
             pathMatch: 'full',
             redirectTo: '/sketch'

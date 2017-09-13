@@ -7,6 +7,7 @@ import {SketchClassificationModule} from './sketch-classification/sketch-classif
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import {RoadmapComponent} from './components/roadmap/roadmap.component';
+import {CollisionAvoidanceModule} from './collision-avoidance/collision-avoidance.module';
 
 @NgModule({
   declarations: [
@@ -20,6 +21,7 @@ import {RoadmapComponent} from './components/roadmap/roadmap.component';
 
     AppRoutingModule,
     SketchClassificationModule,
+    CollisionAvoidanceModule
   ],
   providers: [],
   bootstrap: [AppComponent]
