@@ -328,6 +328,7 @@ module.exports = module.exports.toString();
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_rxjs_add_observable_of___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_rxjs_add_observable_of__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__animations__ = __webpack_require__("../../../../../src/app/animations.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__service_sketch_classification_model_service__ = __webpack_require__("../../../../../src/app/sketch-classification/service/sketch-classification-model.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__ng_bootstrap_ng_bootstrap__ = __webpack_require__("../../../../@ng-bootstrap/ng-bootstrap/index.js");
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return SketchClassifierComponent; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -342,10 +343,12 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
+
 var SketchClassifierComponent = (function () {
-    function SketchClassifierComponent(modelSvc, host) {
+    function SketchClassifierComponent(modelSvc, host, modalSvc) {
         this.modelSvc = modelSvc;
         this.host = host;
+        this.modalSvc = modalSvc;
         this.colors = [
             {
                 backgroundColor: '#2196F3'
@@ -396,13 +399,10 @@ var SketchClassifierComponent = (function () {
                 backgroundColor: '#E91E63'
             },
         ];
-        console.debug(this.host);
     }
-    SketchClassifierComponent.prototype.ngOnInit = function () {
-        this.modelSvc.loadModel();
-    };
     SketchClassifierComponent.prototype.ngAfterViewInit = function () {
         var _this = this;
+        this.modelSvc.loadModel();
         this.modelSvc.predictionFinished.subscribe(function () {
             var box = _this.host.nativeElement.getBoundingClientRect();
             // if less than half the host is visible scroll it into view TODO animate scrolling
@@ -430,10 +430,10 @@ SketchClassifierComponent = __decorate([
             __WEBPACK_IMPORTED_MODULE_2__animations__["a" /* fadeInOutAnimation */]
         ]
     }),
-    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_3__service_sketch_classification_model_service__["a" /* SketchClassificationModelService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__service_sketch_classification_model_service__["a" /* SketchClassificationModelService */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_0__angular_core__["ElementRef"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_0__angular_core__["ElementRef"]) === "function" && _b || Object])
+    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_3__service_sketch_classification_model_service__["a" /* SketchClassificationModelService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__service_sketch_classification_model_service__["a" /* SketchClassificationModelService */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_0__angular_core__["ElementRef"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_0__angular_core__["ElementRef"]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_4__ng_bootstrap_ng_bootstrap__["b" /* NgbModal */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_4__ng_bootstrap_ng_bootstrap__["b" /* NgbModal */]) === "function" && _c || Object])
 ], SketchClassifierComponent);
 
-var _a, _b;
+var _a, _b, _c;
 //# sourceMappingURL=sketch-classifier.component.js.map
 
 /***/ }),
@@ -441,7 +441,7 @@ var _a, _b;
 /***/ "../../../../../src/app/sketch-classification/components/sketch-draw/sketch-draw.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"card\">\r\n  <div class=\"card-body\">\r\n    <div><h2>Draw Something!</h2>\r\n      <canvas #drawCanvas [width]=\"10 * targetSize\" [height]=\"10 * targetSize\"\r\n              (mousedown)=\"startDrawing($event)\" (touchstart)=\"startDrawing($event)\" (mousemove)=\"draw($event)\"\r\n              (touchmove)=\"draw($event)\" (mouseleave)=\"stopDrawing()\"\r\n              (mouseup)=\"stopDrawing()\" (touchend)=\"stopDrawing()\"></canvas>\r\n    </div>\r\n    <div>\r\n      <button class=\"btn btn-secondary\" (click)=\"clearCanvas()\">Clear</button>\r\n      <button class=\"btn btn-light\" (click)=\"modalSvc.open(helpContent)\"><i class=\"fa fa-question\"></i></button>\r\n    </div>\r\n  </div>\r\n  <div class=\"aip-model-load-overlay\" *ngIf=\"!modelSvc.modelLoaded\">\r\n    <div class=\"text-center\">\r\n      <div>Loading model..</div>\r\n      <div><i class=\"fa fa-spin fa-circle-o-notch\"></i></div>\r\n    </div>\r\n  </div>\r\n</div>\r\n<ng-template #helpContent let-d=\"dismiss\">\r\n  <div class=\"modal-header\">\r\n    <h2 class=\"modal-title\">Don't know what to draw?</h2>\r\n  </div>\r\n  <div class=\"modal-body\">\r\n    <div>Currently we can recognize drawings of these objects:</div>\r\n    <ul>\r\n      <li *ngFor=\"let c of modelSvc.classes\">{{c}}</li>\r\n    </ul>\r\n    <div>We will be adding more object classes in the future.</div>\r\n    <button type=\"button\" class=\"btn btn-secondary\" aria-label=\"Close\" (click)=\"d()\">Close</button>\r\n  </div>\r\n</ng-template>\r\n\r\n"
+module.exports = "<div class=\"card\">\r\n  <div class=\"card-body\">\r\n    <ngb-alert type=\"warning\" [hidden]=\"!waringDisplayed\" (close)=\"waringDisplayed = false\">\r\n      If this demo isn't working, the deep learning library isn't supporting your browser. <br/>\r\n      Currently iOS and Safari are not supported.\r\n      Its definitely working in Chrome under Windows.\r\n    </ngb-alert>\r\n    <div><h2>Draw Something!</h2>\r\n      <canvas #drawCanvas [width]=\"10 * targetSize\" [height]=\"10 * targetSize\"\r\n              (mousedown)=\"startDrawing($event)\" (touchstart)=\"startDrawing($event)\" (mousemove)=\"draw($event)\"\r\n              (touchmove)=\"draw($event)\" (mouseleave)=\"stopDrawing()\"\r\n              (mouseup)=\"stopDrawing()\" (touchend)=\"stopDrawing()\"></canvas>\r\n    </div>\r\n    <div>\r\n      <button class=\"btn btn-secondary\" (click)=\"clearCanvas()\">Clear</button>\r\n      <button class=\"btn btn-light\" (click)=\"modalSvc.open(helpContent)\"><i class=\"fa fa-question\"></i></button>\r\n    </div>\r\n  </div>\r\n  <div class=\"aip-model-load-overlay\" *ngIf=\"!modelSvc.modelLoaded\">\r\n    <div class=\"text-center\">\r\n      <div>Loading model..</div>\r\n      <div><i class=\"fa fa-spin fa-circle-o-notch\"></i></div>\r\n    </div>\r\n  </div>\r\n</div>\r\n<ng-template #helpContent let-d=\"dismiss\">\r\n  <div class=\"modal-header\">\r\n    <h2 class=\"modal-title\">Don't know what to draw?</h2>\r\n  </div>\r\n  <div class=\"modal-body\">\r\n    <div>Currently we can recognize drawings of these objects:</div>\r\n    <ul>\r\n      <li *ngFor=\"let c of modelSvc.classes\">{{c}}</li>\r\n    </ul>\r\n    <div>We will be adding more object classes in the future.</div>\r\n    <button type=\"button\" class=\"btn btn-secondary\" aria-label=\"Close\" (click)=\"d()\">Close</button>\r\n  </div>\r\n</ng-template>\r\n\r\n"
 
 /***/ }),
 
@@ -453,7 +453,7 @@ exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-b
 
 
 // module
-exports.push([module.i, ":host {\n  display: inline-block; }\n\ndiv button + button {\n  margin-left: 0.5rem; }\n\ncanvas {\n  border: 1px solid #495057;\n  -webkit-user-select: none;\n     -moz-user-select: none;\n      -ms-user-select: none;\n          user-select: none; }\n  canvas:hover {\n    cursor: crosshair; }\n\n.card {\n  position: relative; }\n  .card .aip-model-load-overlay {\n    position: absolute;\n    top: 0;\n    right: 0;\n    bottom: 0;\n    left: 0;\n    background-color: #f8f9fa; }\n    .card .aip-model-load-overlay > div {\n      position: absolute;\n      top: 50%;\n      left: 50%;\n      -webkit-transform: translate(-50%, -50%);\n              transform: translate(-50%, -50%); }\n", ""]);
+exports.push([module.i, ":host {\n  display: inline-block; }\n\ndiv button + button {\n  margin-left: 0.5rem; }\n\ncanvas {\n  border: 1px solid #495057;\n  -webkit-user-select: none;\n     -moz-user-select: none;\n      -ms-user-select: none;\n          user-select: none; }\n  canvas:hover {\n    cursor: crosshair; }\n\n.card {\n  position: relative; }\n  .card ngb-alert {\n    display: block;\n    width: 320px; }\n  .card .aip-model-load-overlay {\n    position: absolute;\n    top: 0;\n    right: 0;\n    bottom: 0;\n    left: 0;\n    background-color: #f8f9fa; }\n    .card .aip-model-load-overlay > div {\n      position: absolute;\n      top: 50%;\n      left: 50%;\n      -webkit-transform: translate(-50%, -50%);\n              transform: translate(-50%, -50%); }\n", ""]);
 
 // exports
 
@@ -492,6 +492,7 @@ var SketchDrawComponent = (function () {
         this.modelSvc = modelSvc;
         this.targetSize = 32;
         this.isDrawing = false;
+        this.waringDisplayed = true;
     }
     SketchDrawComponent.prototype.ngAfterViewInit = function () {
         this.ctx = this.canvas.nativeElement.getContext('2d');
@@ -537,11 +538,17 @@ var SketchDrawComponent = (function () {
      * with normalized and scaled image data
      */
     SketchDrawComponent.prototype.stopDrawing = function () {
+        var _this = this;
         if (this.isDrawing) {
             this.isDrawing = false;
             this.ctx.closePath();
-            var scaled = this.scaleImageDataToTargetSize();
-            this.modelSvc.predict(this.normalizeToBWImageData(scaled));
+            // wait until drawing is completely finished
+            window.setTimeout(function () {
+                if (!_this.isDrawing) {
+                    var scaled = _this.scaleImageDataToTargetSize();
+                    _this.modelSvc.predict(_this.normalizeToBWImageData(scaled));
+                }
+            }, 500);
         }
     };
     /**
