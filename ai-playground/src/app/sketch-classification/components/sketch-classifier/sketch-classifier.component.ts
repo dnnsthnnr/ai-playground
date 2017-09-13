@@ -1,12 +1,8 @@
-import {AfterViewInit, Component, ElementRef, OnInit} from '@angular/core';
-import {
-  Array3D, CheckpointLoader, Graph, NDArrayInitializer, NDArrayMath, NDArrayMathCPU, NDArrayMathGPU, Session,
-  Tensor
-} from 'deeplearn';
-import {sizeFromShape} from 'deeplearn/dist/src/util';
+import {AfterViewInit, Component, ElementRef, OnInit, TemplateRef, ViewChild} from '@angular/core';
 import 'rxjs/add/observable/of';
 import {fadeInOutAnimation} from '../../../animations';
 import {SketchClassificationModelService} from '../../service/sketch-classification-model.service';
+import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 
 
 @Component({
@@ -17,7 +13,7 @@ import {SketchClassificationModelService} from '../../service/sketch-classificat
     fadeInOutAnimation
   ]
 })
-export class SketchClassifierComponent implements OnInit, AfterViewInit {
+export class SketchClassifierComponent implements AfterViewInit {
 
   private colors = [
     {
@@ -70,16 +66,12 @@ export class SketchClassifierComponent implements OnInit, AfterViewInit {
     },
   ];
 
-
-  constructor(public modelSvc: SketchClassificationModelService, private host: ElementRef) {
-    console.debug(this.host);
-  }
-
-  ngOnInit() {
-    this.modelSvc.loadModel();
+  constructor(public modelSvc: SketchClassificationModelService, private host: ElementRef, private modalSvc: NgbModal) {
   }
 
   ngAfterViewInit() {
+    this.modelSvc.loadModel();
+
     this.modelSvc.predictionFinished.subscribe(() => {
       let box = this.host.nativeElement.getBoundingClientRect();
 

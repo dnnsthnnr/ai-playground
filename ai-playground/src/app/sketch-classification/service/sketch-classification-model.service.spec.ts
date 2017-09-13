@@ -1,6 +1,6 @@
-import { TestBed, inject } from '@angular/core/testing';
+import {inject, TestBed} from '@angular/core/testing';
 
-import { SketchClassificationModelService } from './sketch-classification-model.service';
+import {SketchClassificationModelService} from './sketch-classification-model.service';
 
 describe('SketchClassificationModelService', () => {
   beforeEach(() => {

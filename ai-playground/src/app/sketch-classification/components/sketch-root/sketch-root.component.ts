@@ -1,6 +1,4 @@
-import {Component, ViewChild} from '@angular/core';
-import {SketchClassifierComponent} from '../sketch-classifier/sketch-classifier.component';
-import {Array3D} from 'deeplearn';
+import {Component} from '@angular/core';
 
 @Component({
   selector: 'aip-sketch-root',
