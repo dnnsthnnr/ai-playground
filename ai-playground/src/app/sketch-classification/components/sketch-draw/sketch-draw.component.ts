@@ -16,11 +16,13 @@ export class SketchDrawComponent implements AfterViewInit {
 
   private ctx: CanvasRenderingContext2D;
 
-  private targetSize = 32;
+  private _targetSize = 32;
 
   private isDrawing = false;
 
-  private waringDisplayed = true;
+  private _waringDisplayed = true;
+
+  private timeoutId;
 
   constructor(public modalSvc: NgbModal, public modelSvc: SketchClassificationModelService) {
   }
@@ -41,6 +43,10 @@ export class SketchDrawComponent implements AfterViewInit {
   startDrawing(event: MouseEvent | TouchEvent) {
     this.isDrawing = true;
     this.ctx.beginPath();
+
+    if (this.timeoutId) {
+      window.clearTimeout(this.timeoutId);
+    }
 
     if (event instanceof TouchEvent) {
       let rect = this.canvas.nativeElement.getBoundingClientRect();
@@ -83,13 +89,11 @@ export class SketchDrawComponent implements AfterViewInit {
       this.ctx.closePath();
 
       // wait until drawing is completely finished
-      window.setTimeout(() => {
-        if (!this.isDrawing) {
-          let scaled = this.scaleImageDataToTargetSize();
+      this.timeoutId = window.setTimeout(() => {
+        let scaled = this.scaleImageDataToTargetSize();
 
-          this.modelSvc.predict(this.normalizeToBWImageData(scaled))
-        }
-      }, 500)
+        this.modelSvc.predict(this.normalizeToBWImageData(scaled))
+      }, 1000)
 
     }
   }
@@ -109,12 +113,12 @@ export class SketchDrawComponent implements AfterViewInit {
    */
   scaleImageDataToTargetSize() {
     let tempCanvas = document.createElement('canvas');
-    tempCanvas.height = this.targetSize;
-    tempCanvas.width = this.targetSize;
+    tempCanvas.height = this._targetSize;
+    tempCanvas.width = this._targetSize;
     let tempCtx: CanvasRenderingContext2D = (<CanvasRenderingContext2D> tempCanvas.getContext('2d'));
 
-    tempCtx.drawImage(this.canvas.nativeElement, 0, 0, this.targetSize, this.targetSize);
-    return tempCtx.getImageData(0, 0, this.targetSize, this.targetSize)
+    tempCtx.drawImage(this.canvas.nativeElement, 0, 0, this._targetSize, this._targetSize);
+    return tempCtx.getImageData(0, 0, this._targetSize, this._targetSize)
 
   }
 
@@ -133,13 +137,29 @@ export class SketchDrawComponent implements AfterViewInit {
     for (let i = 0; i < data.data.length; i = i + 4) {
       let alphaC = data.data[i + 3] / 255.0;
       row.push([alphaC]);
-      if (row.length === this.targetSize) {
+      if (row.length === this._targetSize) {
         resultMatrix.push(row);
         row = [];
       }
     }
-    return Array3D.new([this.targetSize, this.targetSize, 1], resultMatrix);
+    return Array3D.new([this._targetSize, this._targetSize, 1], resultMatrix);
 
+  }
+
+  get targetSize(): number {
+    return this._targetSize;
+  }
+
+  set targetSize(value: number) {
+    this._targetSize = value;
+  }
+
+  get waringDisplayed(): boolean {
+    return this._waringDisplayed;
+  }
+
+  set waringDisplayed(value: boolean) {
+    this._waringDisplayed = value;
   }
 }
 
