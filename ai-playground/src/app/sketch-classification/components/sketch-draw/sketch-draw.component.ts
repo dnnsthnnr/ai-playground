@@ -22,6 +22,8 @@ export class SketchDrawComponent implements AfterViewInit {
 
   private _waringDisplayed = true;
 
+  private timeoutId;
+
   constructor(public modalSvc: NgbModal, public modelSvc: SketchClassificationModelService) {
   }
 
@@ -41,6 +43,10 @@ export class SketchDrawComponent implements AfterViewInit {
   startDrawing(event: MouseEvent | TouchEvent) {
     this.isDrawing = true;
     this.ctx.beginPath();
+
+    if (this.timeoutId) {
+      window.clearTimeout(this.timeoutId);
+    }
 
     if (event instanceof TouchEvent) {
       let rect = this.canvas.nativeElement.getBoundingClientRect();
@@ -83,13 +89,11 @@ export class SketchDrawComponent implements AfterViewInit {
       this.ctx.closePath();
 
       // wait until drawing is completely finished
-      window.setTimeout(() => {
-        if (!this.isDrawing) {
-          let scaled = this.scaleImageDataToTargetSize();
+      this.timeoutId = window.setTimeout(() => {
+        let scaled = this.scaleImageDataToTargetSize();
 
-          this.modelSvc.predict(this.normalizeToBWImageData(scaled))
-        }
-      }, 500)
+        this.modelSvc.predict(this.normalizeToBWImageData(scaled))
+      }, 1000)
 
     }
   }

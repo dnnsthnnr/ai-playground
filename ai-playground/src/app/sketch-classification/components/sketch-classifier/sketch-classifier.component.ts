@@ -1,4 +1,4 @@
-import {AfterViewInit, Component, ElementRef, OnInit, TemplateRef, ViewChild} from '@angular/core';
+import {AfterViewInit, Component, ElementRef} from '@angular/core';
 import 'rxjs/add/observable/of';
 import {fadeInOutAnimation} from '../../../animations';
 import {SketchClassificationModelService} from '../../service/sketch-classification-model.service';
@@ -66,7 +66,7 @@ export class SketchClassifierComponent implements AfterViewInit {
     },
   ];
 
-  constructor(public modelSvc: SketchClassificationModelService, private host: ElementRef, private modalSvc: NgbModal) {
+  constructor(public modelSvc: SketchClassificationModelService, private host: ElementRef, private _modalSvc: NgbModal) {
   }
 
   ngAfterViewInit() {
@@ -92,4 +92,7 @@ export class SketchClassifierComponent implements AfterViewInit {
     return this.modelSvc.classes[idx];
   }
 
+  get modalSvc(): NgbModal {
+    return this._modalSvc;
+  }
 }
