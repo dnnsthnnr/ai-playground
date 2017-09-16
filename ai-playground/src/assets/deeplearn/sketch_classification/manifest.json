@@ -163,14 +163,14 @@
   "dense_3/bias": {
     "filename": "dense_3_bias",
     "shape": [
-      16
+      22
     ]
   },
   "dense_3/kernel": {
     "filename": "dense_3_kernel",
     "shape": [
       512,
-      16
+      22
     ]
   }
 }
