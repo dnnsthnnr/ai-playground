@@ -43,6 +43,7 @@
 
 }
 
+
 header {
   position: fixed;
   top: 0;
@@ -55,5 +56,9 @@ header {
   z-index: 999;
   button {
     box-shadow: none;
+  }
+
+  .navbar-brand {
+    color: $white
   }
 }

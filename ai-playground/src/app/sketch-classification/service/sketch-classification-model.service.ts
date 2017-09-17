@@ -1,4 +1,4 @@
-import {EventEmitter, Injectable} from '@angular/core';
+import {EventEmitter, Injectable} from "@angular/core";
 import {
   Array3D,
   CheckpointLoader,
@@ -9,8 +9,8 @@ import {
   NDArrayMathGPU,
   Session,
   Tensor
-} from 'deeplearn';
-import {sizeFromShape} from 'deeplearn/dist/src/util';
+} from "deeplearn";
+import {sizeFromShape} from "deeplearn/dist/src/util";
 
 @Injectable()
 export class SketchClassificationModelService {
@@ -41,7 +41,13 @@ export class SketchClassificationModelService {
     'Envelope',
     'Clock',
     'Camera',
-    'Face'
+    'Face',
+    "Car",
+    "Bicycle",
+    "Hamburger",
+    "Steak",
+    "Bowtie",
+    "Truck"
   ];
 
   private math: NDArrayMath;
@@ -52,12 +58,13 @@ export class SketchClassificationModelService {
 
   private modelReady: Promise<any>;
 
+  private session: Session;
+
   constructor() {
     try {
       this.math = new NDArrayMathGPU();
       console.debug('using gpu')
     } catch (err) {
-      console.debug(err);
       console.debug('using cpu');
       this.math = new NDArrayMathCPU();
     }
@@ -101,10 +108,12 @@ export class SketchClassificationModelService {
         const dense1_relu = this.g.relu(dense1);
         const dense2 = this.g.layers.dense('dense2', dense1_relu, 512, null, true, new NDArrayInitializer(vars['dense_2/kernel']), new NDArrayInitializer(vars['dense_2/bias']));
         const dense2_relu = this.g.relu(dense2);
-        const dense3 = this.g.layers.dense('dense3', dense2_relu, 16, null, true, new NDArrayInitializer(vars['dense_3/kernel']), new NDArrayInitializer(vars['dense_3/bias']));
+        const dense3 = this.g.layers.dense('dense3', dense2_relu, this.classes.length, null, true, new NDArrayInitializer(vars['dense_3/kernel']), new NDArrayInitializer(vars['dense_3/bias']));
         this.predictionTensor = this.g.softmax(dense3);
 
         this._modelLoaded = true;
+
+        this.session = new Session(this.g, this.math);
 
         resolve()
       }).catch((err) => {
@@ -123,25 +132,23 @@ export class SketchClassificationModelService {
 
     this.modelReady.then(() => {
 
-      const sess = new Session(this.g, this.math);
-
-      this.math.scope((keep, track) => {
+      this.math.scope(() => {
         const mapping = [{
           tensor: this.inputTensor,
           data: data
         }];
 
-        const result = sess.eval(this.predictionTensor, mapping);
+        const result = this.session.eval(this.predictionTensor, mapping);
 
         let tmpClassScores = [];
-        result.getValues().forEach((score, index) => {
+        result.getValues().forEach((score) => {
           tmpClassScores.push(Math.round(score * 100));
         });
 
 
         this._classScores = tmpClassScores;
         this._hasScores = true;
-        this.predictionFinished.emit()
+        this.predictionFinished.emit();
 
       })
 

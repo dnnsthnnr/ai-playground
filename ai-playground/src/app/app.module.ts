@@ -7,11 +7,13 @@ import {SketchClassificationModule} from './sketch-classification/sketch-classif
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import {RoadmapComponent} from './components/roadmap/roadmap.component';
+import { IndexPageComponent } from './components/index-page/index-page.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     RoadmapComponent,
+    IndexPageComponent,
   ],
   imports: [
     BrowserModule,

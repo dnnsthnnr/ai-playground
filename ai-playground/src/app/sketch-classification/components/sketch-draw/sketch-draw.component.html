@@ -1,10 +1,10 @@
+<ngb-alert type="warning" [hidden]="!waringDisplayed" (close)="waringDisplayed = false">
+  If this demo isn't working, the deep learning library isn't supporting your browser. <br/>
+  Currently iOS and Safari are not supported.
+  Its definitely working in Chrome under Windows.
+</ngb-alert>
 <div class="card">
   <div class="card-body">
-    <ngb-alert type="warning" [hidden]="!waringDisplayed" (close)="waringDisplayed = false">
-      If this demo isn't working, the deep learning library isn't supporting your browser. <br/>
-      Currently iOS and Safari are not supported.
-      Its definitely working in Chrome under Windows.
-    </ngb-alert>
     <div><h2>Draw Something!</h2>
       <canvas #drawCanvas [width]="10 * targetSize" [height]="10 * targetSize"
               (mousedown)="startDrawing($event)" (touchstart)="startDrawing($event)" (mousemove)="draw($event)"

@@ -1,18 +1,13 @@
 import os
-import pprint
 import random
 
-import PIL
+import keras.losses as losses
+import keras.metrics as metrics
 import numpy
-from keras import backend as K
 from keras.callbacks import ModelCheckpoint, Callback
 from keras.layers import Conv2D, MaxPool2D, Flatten, Dense, Dropout, ZeroPadding2D
 from keras.models import Sequential
-import keras.losses as losses
-import keras.metrics as metrics
 from keras.optimizers import SGD
-import matplotlib.cm as cm
-from tensorflow.contrib.learn.python.learn.datasets import base
 
 from python import utils
 
@@ -32,7 +27,13 @@ CLASSES = [
     "envelope",
     "clock",
     "camera",
-    "face"
+    "face",
+    "car",
+    "bicycle",
+    "hamburger",
+    "steak",
+    "bowtie",
+    "truck"
 ]
 
 DATA_DIR = os.path.join(utils.DATA_DIR, "sketch")
@@ -87,10 +88,10 @@ def load_data():
     x = []
     y = []
     for clazz in CLASSES:
-        base.maybe_download(clazz + ".npy", DATA_DIR,
+        utils.maybe_download(clazz + ".npy", DATA_DIR,
                             "https://storage.googleapis.com/quickdraw_dataset/full/numpy_bitmap/{}.npy".format(clazz))
         x_data = numpy.load(os.path.join(DATA_DIR, clazz + ".npy"))
-        # only use 0.1% of the 100k samples
+        # only use 5% of the 100k samples
         numpy.random.shuffle(x_data)
         x_data = x_data[:int(0.05 * len(x_data))]
         y_data = numpy.zeros((len(x_data), len(CLASSES)))

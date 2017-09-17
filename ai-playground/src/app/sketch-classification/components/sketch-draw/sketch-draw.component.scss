@@ -18,13 +18,14 @@ canvas {
   }
 }
 
+ngb-alert {
+  display: block;
+  width: (320px/16px) + 2.5 * $font-size-base;
+}
+
 .card {
   position: relative;
 
-  ngb-alert {
-    display: block;
-    width: 320px;
-  }
 
   .aip-model-load-overlay {
     position: absolute;

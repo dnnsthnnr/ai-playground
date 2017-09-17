@@ -2,6 +2,7 @@ import {NgModule} from '@angular/core';
 import {RouterModule} from '@angular/router';
 import {RoadmapComponent} from './components/roadmap/roadmap.component';
 import {AppComponent} from './components/app/app.component';
+import {IndexPageComponent} from './components/index-page/index-page.component';
 
 @NgModule({
   imports: [
@@ -10,6 +11,10 @@ import {AppComponent} from './components/app/app.component';
         path: '',
         component: AppComponent,
         children: [
+          {
+            path: "",
+            component: IndexPageComponent
+          },
           {
             path: 'roadmap',
             component: RoadmapComponent
@@ -21,7 +26,7 @@ import {AppComponent} from './components/app/app.component';
           {
             path: '**',
             pathMatch: 'full',
-            redirectTo: '/sketch'
+            redirectTo: '/'
           }
         ]
       }
