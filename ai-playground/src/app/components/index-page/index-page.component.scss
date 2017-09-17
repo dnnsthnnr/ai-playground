@@ -1,0 +1,23 @@
+@import "../../../bootstrap-config";
+
+.aip-border-bottom {
+  border-bottom: $border-width solid $input-border-color;
+}
+
+.aip-demo-link {
+  color: $body-color;
+  .card {
+    transition: all 0.25s ease-in-out;
+    height: 100%;
+
+    &.aip-roadmap-card {
+      background-color: $gray-200;
+    }
+  }
+  @include hover-focus-active() {
+    color: $body-color;
+    .card {
+      box-shadow: 2px 2px 3px 1px $shadow-black;
+    }
+  }
+}

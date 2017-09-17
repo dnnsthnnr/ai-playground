@@ -65,7 +65,6 @@ export class SketchClassificationModelService {
       this.math = new NDArrayMathGPU();
       console.debug('using gpu')
     } catch (err) {
-      console.debug(err);
       console.debug('using cpu');
       this.math = new NDArrayMathCPU();
     }
@@ -150,8 +149,6 @@ export class SketchClassificationModelService {
         this._classScores = tmpClassScores;
         this._hasScores = true;
         this.predictionFinished.emit();
-
-        console.debug(this.session.activationArrayMap, this.g.getNodes(), this.session.activationArrayMap.get(this.g.getNodes()[3].output).getValues());
 
       })
 
