@@ -13,14 +13,24 @@
   }
 }
 
-.aip-sidenav {
+.aip-sidenav-backdrop {
   position: fixed;
   left: 0;
   top: 0;
   bottom: 0;
+  right: 0;
+  z-index: 999;
+  background-color: transparentize($black, 0.5);
+}
+
+.aip-sidenav {
   background-color: $body-bg;
   box-shadow: 3px 0 6px rgba(0, 0, 0, .24);
   padding: $spacer 0;
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
   z-index: 1000;
 
   .list-group {
@@ -42,7 +52,6 @@
   }
 
 }
-
 
 header {
   position: fixed;

@@ -1,25 +1,16 @@
-import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
+import {Component, ElementRef, ViewChild} from '@angular/core';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent implements OnInit {
+export class AppComponent {
 
   private _isCollapsed = true;
 
   @ViewChild('header')
   private header: ElementRef;
-
-  ngOnInit() {
-    document.body.onclick = () => {
-      this.closeMenu();
-    };
-    document.ontouchstart = () => {
-      this.closeMenu();
-    };
-  }
 
   /**
    * close side navigation
