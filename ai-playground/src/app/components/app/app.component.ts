@@ -14,8 +14,18 @@ export class AppComponent implements OnInit {
 
   ngOnInit() {
     document.body.onclick = () => {
-      this._isCollapsed = true;
-    }
+      this.closeMenu();
+    };
+    document.ontouchstart = () => {
+      this.closeMenu();
+    };
+  }
+
+  /**
+   * close side navigation
+   */
+  closeMenu () {
+    this._isCollapsed = true;
   }
 
   /**
