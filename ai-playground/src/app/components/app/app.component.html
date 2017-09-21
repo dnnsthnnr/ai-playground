@@ -3,6 +3,8 @@
     class="fa fa-bars"></i></button>
   <a routerLink="/" class="navbar-brand">AI Playground</a>
 </header>
+<div [ngbCollapse]="isCollapsed" class="aip-sidenav-backdrop" (click)="closeMenu()" (touchend)="closeMenu()">
+</div>
 <nav class="aip-sidenav" [ngbCollapse]="isCollapsed">
   <div class="list-group">
     <div class="list-group-item list-group-item-light">Demos</div>
