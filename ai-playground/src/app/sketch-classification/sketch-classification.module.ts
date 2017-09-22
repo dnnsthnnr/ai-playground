@@ -7,6 +7,7 @@ import {SketchClassifierComponent} from './components/sketch-classifier/sketch-c
 import {ChartsModule} from 'ng2-charts';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import {SketchClassificationModelService} from './service/sketch-classification-model.service';
+import {SharedModule} from '../shared/shared.module';
 
 @NgModule({
   imports: [
@@ -15,6 +16,7 @@ import {SketchClassificationModelService} from './service/sketch-classification-
     NgbModule,
 
     SketchClassificationRoutingModule,
+    SharedModule
   ],
   declarations: [
     SketchDrawComponent,

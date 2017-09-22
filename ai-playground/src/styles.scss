@@ -22,3 +22,10 @@ body, html {
   align-items: center;
   justify-content: center;
 }
+
+canvas {
+  //image-rendering: -webkit-optimize-contrast;
+  &.vis {
+    border: $border-width solid $black;
+  }
+}

@@ -1,10 +1,24 @@
-<div class="aip-demo-content-center">
-  <div>
-    <div>
-      <aip-sketch-draw></aip-sketch-draw>
-    </div>
-    <div>
-      <aip-sketch-classifier></aip-sketch-classifier>
-    </div>
-  </div>
-</div>
+<ngb-tabset>
+  <ngb-tab title="Demo">
+    <ng-template ngbTabContent>
+      <div class="aip-demo-content-center">
+        <div>
+          <div>
+            <aip-sketch-draw></aip-sketch-draw>
+          </div>
+          <div>
+            <aip-sketch-classifier></aip-sketch-classifier>
+          </div>
+        </div>
+      </div>
+    </ng-template>
+  </ngb-tab>
+  <ngb-tab id="vis" title="Visualisation">
+    <ng-template ngbTabContent>
+      <ng-container *ngTemplateOutlet="temp"></ng-container>
+    </ng-template>
+  </ngb-tab>
+</ngb-tabset>
+<ng-template #temp>
+  <aip-deeplearn-convolutional-visualiser #visualiser [session]="modelSvc.session" [visualisationInfos]="modelSvc.visualisationInfos"></aip-deeplearn-convolutional-visualiser>
+</ng-template>
