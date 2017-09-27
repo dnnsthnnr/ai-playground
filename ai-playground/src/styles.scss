@@ -22,3 +22,14 @@ body, html {
   align-items: center;
   justify-content: center;
 }
+
+.aip-mobile-friendly {
+  max-width: 320px;
+  width: 320px;
+}
+
+.aip-demo-content-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

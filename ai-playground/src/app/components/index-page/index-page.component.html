@@ -2,6 +2,7 @@
   <section class="aip-border-bottom py-4">
     <h1>Welcome to AI Playground</h1>
     <p>Here you can explore interactive demos of applications using artificial intelligence.</p>
+    <ngb-alert [dismissible]="false">We recommend to try these demos not on mobile devices! Furthermore we recommend to use a chrome browser.</ngb-alert>
   </section>
   <section class="py-4">
     <h2>Demos</h2>
@@ -12,6 +13,15 @@
           <div class="card-body">
             <h3 class="card-title">Sketch Classifier</h3>
             <p class="card-text">Draw something in the defined area and let a convolutional neural network guess what you did draw.</p>
+          </div>
+        </div>
+      </a>
+      <a routerLink="style-transfer" class="aip-demo-link col-12 col-sm-6 col-md-4">
+        <div class="card">
+          <img class="card-img-top" src="assets/style-transfer-preview.jpg" alt="style transfer preview">
+          <div class="card-body">
+            <h3 class="card-title">Style Transfer</h3>
+            <p class="card-text">Become an artist and transfer the style of a painting to any picture.</p>
           </div>
         </div>
       </a>

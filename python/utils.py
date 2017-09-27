@@ -6,31 +6,52 @@ import os
 import random
 
 import numpy as np
+import re
 import wget as wget
 from PIL import Image as pil_image
 from keras import backend as K
+import tensorflow as tf
+
+from python import dump_ckpt_vars
 
 DATA_DIR = "../data"
 MODEL_DIR = "../model"
 TF_BOARD_DIR = "../tf-logs"
 
 
-def character_encode_sequence(sequence, seq_len, alphabet="abcdefghijklmnopqrstuvwxyz ", ):
-    vectorized_seq = np.zeros((seq_len, len(alphabet), 1))
+def character_encode_sequence(sequence, alphabet="abcdefghijklmnopqrstuvwxyz ", ):
     sequence = sequence.lower()
+    sequence = re.sub("[^" + alphabet + "]", "", sequence)
     split = list(sequence)
+    vectorized_seq = np.zeros((len(split), 1))
     i = 0
-    for c in split:
-        al_idx = alphabet.find(c)
-        if al_idx != -1:
-            # set specific index at char position of sequence to true/1
-            vectorized_seq[i][al_idx][0] = 1
-            i = i + 1
+    while i < len(split):
+        al_idx = alphabet.find(split[i])
+        # set specific index at char position of sequence to true/1
+        vectorized_seq[i][0] = al_idx + 1
+        i = i + 1
+
+    # normalize
+    vectorized_seq = vectorized_seq / len(alphabet)
+    return vectorized_seq
+
+
+def hot_encoded_seq(sequence, maxlength, alphabet):
+    sequence = sequence.lower()
+    sequence = re.sub("[^" + alphabet + "]", "", sequence)
+    sequence = sequence.replace("  ", " ")  # replace double space with single
+    split = list(sequence)
+    if len(split) > maxlength:
+        split = split[-maxlength:]  # use only last sub-sequence
+    vectorized_seq = np.zeros((maxlength, len(alphabet), 1))
+    for i in range(len(split)):
+        c_idx = alphabet.find(split[i])
+        vectorized_seq[i][c_idx][0] = 1
 
     return vectorized_seq
 
 
-def load_image_square(image, target_size, normalize=True):
+def load_square_rgb_image(image, target_size, normalize=True):
     img = pil_image.open(image)
     img = img.convert('RGB')
 
@@ -38,14 +59,9 @@ def load_image_square(image, target_size, normalize=True):
         img = crop_to_square(img)
         img = img.resize((target_size, target_size))
 
-    img_a = np.asarray(img, dtype=K.floatx())
-    del img
+    img_a = image_to_array(img, normalize)
 
-    if K.image_data_format() == "channels_first":
-        img_a = np.rollaxis(img_a, 2, 0)
-
-    if normalize:
-        img_a = img_a * 1. / 255
+    img_a = maybe_transform_image_matrix_to_3_channels(img_a)
 
     return img_a
 
@@ -92,6 +108,33 @@ def augment_image(img):
         img = img.transform(img.size, pil_image.AFFINE, (1, 0, x, 0, 1, y))
 
     return img
+
+
+def image_to_array(img, normalize=True):
+    img = np.asarray(img)
+    if normalize:
+        img = img / 255
+    return img
+
+
+def maybe_transform_image_matrix_to_3_channels(m):
+    if m.shape[2] == 1:
+        m = np.stack((m,) * 3, axis=-1)
+    return m
+
+
+def l1_loss(y_true, y_pred):
+    return K.sum(K.abs(y_pred - y_true), axis=-1)
+
+
+def export_keras_for_deeplearn(name):
+    tf_session = K.get_session()
+    saver = tf.train.Saver()
+    if not os.path.exists(os.path.join(MODEL_DIR, name)):
+        os.mkdir(os.path.join(MODEL_DIR, name))
+    ckpt_path = saver.save(tf_session, os.path.join(MODEL_DIR, name + "/cktp"))
+
+    dump_ckpt_vars.main(ckpt_path, "../ai-playground/src/assets/deeplearn/" + name)
 
 
 def progress_bar(current, total, width):

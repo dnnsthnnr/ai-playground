@@ -1,13 +1,3 @@
 aip-sketch-draw, aip-sketch-classifier {
   margin: 1rem;
 }
-
-.aip-demo-content-center {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  :first-child > * {
-    transition: all 0.2s ease-in-out;
-  }
-}

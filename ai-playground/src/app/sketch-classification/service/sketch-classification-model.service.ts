@@ -11,19 +11,10 @@ import {
   Tensor
 } from "deeplearn";
 import {sizeFromShape} from "deeplearn/dist/src/util";
+import {DeeplearnModelService} from '../../shared/utils/deeplearn-model-service';
 
 @Injectable()
-export class SketchClassificationModelService {
-
-  private inputTensor: Tensor;
-
-  private predictionTensor: Tensor;
-
-  private _modelLoaded = false;
-
-  private g: Graph = new Graph();
-
-  private _predictionFinished = new EventEmitter();
+export class SketchClassificationModelService extends DeeplearnModelService{
 
   private _classes = [
     'Circle',
@@ -50,24 +41,12 @@ export class SketchClassificationModelService {
     "Truck"
   ];
 
-  private math: NDArrayMath;
-
   private _classScores = [];
 
   private _hasScores = false;
 
-  private modelReady: Promise<any>;
-
-  private session: Session;
-
   constructor() {
-    try {
-      this.math = new NDArrayMathGPU();
-      console.debug('using gpu')
-    } catch (err) {
-      console.debug('using cpu');
-      this.math = new NDArrayMathCPU();
-    }
+    super()
   }
 
   /**
@@ -124,7 +103,7 @@ export class SketchClassificationModelService {
 
 
   /**
-   * let the model predict
+   * let the model transfer
    * @param data
    */
   predict(data: Array3D) {
@@ -177,13 +156,5 @@ export class SketchClassificationModelService {
 
   get hasScores(): boolean {
     return this._hasScores;
-  }
-
-  get modelLoaded(): boolean {
-    return this._modelLoaded;
-  }
-
-  get predictionFinished(): EventEmitter<any> {
-    return this._predictionFinished;
   }
 }
