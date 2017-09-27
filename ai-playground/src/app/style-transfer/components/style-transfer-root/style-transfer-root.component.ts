@@ -1,5 +1,5 @@
 import {AfterViewInit, Component, ElementRef, NgZone, OnInit, ViewChild} from '@angular/core';
-import {StyleTransformModelService} from '../../services/style-transform-model.service';
+import {StyleTransferModelService} from '../../services/style-transfer-model.service';
 import {Array3D, NDArrayMathGPU} from 'deeplearn';
 
 @Component({
@@ -9,7 +9,7 @@ import {Array3D, NDArrayMathGPU} from 'deeplearn';
 })
 export class StyleTransferRootComponent implements OnInit, AfterViewInit {
 
-  private contentImages = [
+  private _contentImages = [
     {value: document.head.baseURI + '/assets/styles/ghc.jpg', name: 'Gates Center at Carnegie Mellon Univeristy'},
     {value: document.head.baseURI + '/assets/styles/stata.jpg', name: 'Ray and Maria Stata Center'},
     {value: document.head.baseURI + '/assets/styles/scarlett.jpg', name: 'Scarlett Johansson'},
@@ -25,17 +25,17 @@ export class StyleTransferRootComponent implements OnInit, AfterViewInit {
   @ViewChild('contentImage')
   private contentImage: ElementRef;
 
-  private style = 'udnie';
-  private contentSrc = document.head.baseURI + '/assets/styles/stata.jpg';
+  private _style = 'udnie';
+  private _contentSrc = document.head.baseURI + '/assets/styles/stata.jpg';
 
   private _transferBlocked = false;
 
-  constructor(private _modelSvc: StyleTransformModelService, private _ngZone: NgZone) {
+  constructor(private _modelSvc: StyleTransferModelService, private _ngZone: NgZone) {
   }
 
 
   ngOnInit() {
-    this.modelSvc.loadModel({style: this.style});
+    this.modelSvc.loadModel({style: this._style});
     this.modelSvc.predictionFinished.subscribe((result) => {
       this._ngZone.run(() => {
         this.drawImageToCanvas(result);
@@ -93,8 +93,24 @@ export class StyleTransferRootComponent implements OnInit, AfterViewInit {
 
   // getter
 
-  get modelSvc(): StyleTransformModelService {
+  get modelSvc(): StyleTransferModelService {
     return this._modelSvc;
+  }
+
+  get contentImages(): ({ value: string; name: string } | { value: string; name: string } | { value: string; name: string } | { value: string; name: string } | { value: string; name: string } | { value: string; name: string })[] {
+    return this._contentImages;
+  }
+
+  get style(): string {
+    return this._style;
+  }
+
+  get contentSrc(): string {
+    return this._contentSrc;
+  }
+
+  set contentSrc(value: string) {
+    this._contentSrc = value;
   }
 
   get transferBlocked(): boolean {

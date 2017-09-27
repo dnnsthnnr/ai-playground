@@ -15,7 +15,7 @@ import {getUnpackAndPreprocessInputShader, preprocessInput} from '../../shared/u
 import {async} from '@angular/core/testing';
 
 @Injectable()
-export class StyleTransformModelService extends DeeplearnModelService {
+export class StyleTransferModelService extends DeeplearnModelService {
 
   private variables: { [varName: string]: NDArray };
 

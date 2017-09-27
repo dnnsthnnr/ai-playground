@@ -30,7 +30,7 @@ import {IOSNotSupportedComponent} from './components/iosnot-supported/iosnot-sup
           },
           {
             path: 'style-transfer',
-            loadChildren: 'app/style-transform/style-transform.module#StyleTransformModule'
+            loadChildren: 'app/style-transfer/style-transfer.module#StyleTransferModule'
           },
           {
             path: '**',

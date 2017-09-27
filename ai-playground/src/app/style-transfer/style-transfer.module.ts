@@ -2,7 +2,7 @@ import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {StyleTransferRootComponent} from './components/style-transfer-root/style-transfer-root.component';
 import {RouterModule} from '@angular/router';
-import {StyleTransformModelService} from './services/style-transform-model.service';
+import {StyleTransferModelService} from './services/style-transfer-model.service';
 import {FormsModule} from '@angular/forms';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import {NotSupportedComponent} from './components/not-supported/not-supported.component';
@@ -31,9 +31,9 @@ import {IOSBlockerService} from '../shared/services/iosblocker.service';
   ],
   declarations: [StyleTransferRootComponent, NotSupportedComponent],
   providers: [
-    StyleTransformModelService,
+    StyleTransferModelService,
     GPUAvailableResolverService,
   ]
 })
-export class StyleTransformModule {
+export class StyleTransferModule {
 }
