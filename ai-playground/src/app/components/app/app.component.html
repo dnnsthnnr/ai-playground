@@ -8,11 +8,12 @@
 <nav class="aip-sidenav" [ngbCollapse]="isCollapsed">
   <div class="list-group">
     <div class="list-group-item list-group-item-light">Demos</div>
-    <a class="list-group-item" routerLink="/sketch" routerLinkActive="aip-active">Sketch Classification</a>
+    <a class="list-group-item" routerLink="/sketch" routerLinkActive="aip-active" (click)="isCollapsed = true">Sketch Classification</a>
+    <a class="list-group-item" routerLink="/style-transfer" routerLinkActive="aip-active" (click)="isCollapsed = true">Style Transfer</a>
   </div>
   <div class="list-group">
     <div class="list-group-item list-group-item-light">Info</div>
-    <a class="list-group-item" routerLink="/roadmap" routerLinkActive="aip-active">Roadmap</a>
+    <a class="list-group-item" routerLink="/roadmap" routerLinkActive="aip-active" (click)="isCollapsed = true">Roadmap</a>
   </div>
 </nav>
 <div [style.marginTop]="getHeaderHeight()">

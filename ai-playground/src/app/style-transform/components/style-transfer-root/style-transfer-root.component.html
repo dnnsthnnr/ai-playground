@@ -1,0 +1,38 @@
+<div class="aip-demo-content-center">
+  <div class="container mt-4">
+    <div class="card">
+      <div class="card-body">
+        <div class="row">
+          <div class="col-12">
+            <ngb-alert type="warning" [dismissible]="false">This demo has a bottleneck. Where it has to move computation
+              from the gpu to the cpu. Therefore the UI may block, once You hit the transfer button.
+              The transfering may take a <b>few seconds</b>.
+            </ngb-alert>
+          </div>
+          <div class="col-md-6 text-center">
+            <h3>Transformation Image</h3>
+            <img #contentImage class="aip-style-img" [src]="contentSrc"/>
+            <div class="mt-1">
+              <select class="form-control" name="cImage" [(ngModel)]="contentSrc">
+                <option *ngFor="let content of contentImages" [value]="content.value">{{content.name}}</option>
+              </select>
+            </div>
+          </div>
+          <div class="col-md-6 text-center">
+            <h3>Style Image</h3>
+            <img class="aip-style-img" [src]="'/assets/styles/'+style+'.jpg'"/>
+
+          </div>
+        </div>
+        <div class="text-center mt-2">
+          <button class="btn btn-primary" #transformButton [disabled]="transferBlocked" (click)="transfer()">
+            {{transferBlocked ? 'Transfering...' : 'Start Transfer'}}
+          </button>
+        </div>
+        <div class=" text-center mt-2">
+          <canvas #drawCanvas></canvas>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -6,6 +6,8 @@
 
 .aip-demo-link {
   color: $body-color;
+  margin-top: $spacer/2;
+  margin-bottom: $spacer/2;
   .card {
     transition: all 0.25s ease-in-out;
     height: 100%;
