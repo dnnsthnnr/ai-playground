@@ -26,7 +26,7 @@ export class StyleTransferRootComponent implements OnInit, AfterViewInit {
   private contentImage: ElementRef;
 
   private _style = 'udnie';
-  private _contentSrc = document.head.baseURI + '/assets/styles/stata.jpg';
+  private _contentSrc = 'assets/styles/stata.jpg';
 
   private _transferBlocked = false;
 
