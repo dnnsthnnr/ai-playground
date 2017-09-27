@@ -10,12 +10,12 @@ import {Array3D, NDArrayMathGPU} from 'deeplearn';
 export class StyleTransferRootComponent implements OnInit, AfterViewInit {
 
   private _contentImages = [
-    {value: document.head.baseURI + '/assets/styles/ghc.jpg', name: 'Gates Center at Carnegie Mellon Univeristy'},
-    {value: document.head.baseURI + '/assets/styles/stata.jpg', name: 'Ray and Maria Stata Center'},
-    {value: document.head.baseURI + '/assets/styles/scarlett.jpg', name: 'Scarlett Johansson'},
-    {value: document.head.baseURI + '/assets/styles/peacock.jpg', name: 'Peacock'},
-    {value: document.head.baseURI + '/assets/styles/chicago.jpg', name: 'Chicago'},
-    {value: document.head.baseURI + '/assets/styles/golden_gate.jpg', name: 'Golden Gate'},
+    {value: 'assets/styles/ghc.jpg', name: 'Gates Center at Carnegie Mellon Univeristy'},
+    {value: 'assets/styles/stata.jpg', name: 'Ray and Maria Stata Center'},
+    {value: 'assets/styles/scarlett.jpg', name: 'Scarlett Johansson'},
+    {value: 'assets/styles/peacock.jpg', name: 'Peacock'},
+    {value: 'assets/styles/chicago.jpg', name: 'Chicago'},
+    {value: 'assets/styles/golden_gate.jpg', name: 'Golden Gate'},
   ];
 
   @ViewChild('drawCanvas')
