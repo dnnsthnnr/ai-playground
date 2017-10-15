@@ -33,6 +33,10 @@ import {IOSNotSupportedComponent} from './components/iosnot-supported/iosnot-sup
             loadChildren: 'app/style-transfer/style-transfer.module#StyleTransferModule'
           },
           {
+            path: 'image-segmentation',
+            loadChildren: 'app/image-segmentation/image-segmentation.module#ImageSegmentationModule'
+          },
+          {
             path: '**',
             pathMatch: 'full',
             redirectTo: '/'

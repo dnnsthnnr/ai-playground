@@ -1,0 +1,17 @@
+<div class="aip-demo-content-center">
+  <div class="card mt-4">
+    <div class="card-body">
+      <div class="text-center">
+        <div>
+          <!--image and result segmentation container-->
+          <img [src]="currentInput" #inputCanvas [width]="modelSvc.inputDimensions[0]" [height]="modelSvc.inputDimensions[1]" />
+          <canvas #segmentationCanvas [style.width]="modelSvc.inputDimensions[0] + 'px'" [width]="modelSvc.maskDimensions[0]" [height]="modelSvc.maskDimensions[1]"></canvas>
+        </div>
+        <button class="btn btn-primary" (click)="triggerSegmentation()">Segment</button>
+      </div>
+      <div>
+        <!--example container-->
+      </div>
+    </div>
+  </div>
+</div>
