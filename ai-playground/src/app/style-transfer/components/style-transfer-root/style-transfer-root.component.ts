@@ -1,6 +1,7 @@
 import {AfterViewInit, Component, ElementRef, NgZone, OnInit, ViewChild} from '@angular/core';
 import {StyleTransferModelService} from '../../services/style-transfer-model.service';
 import {Array3D, NDArrayMathGPU} from 'deeplearn';
+import {computeTexShapeFrom3D} from 'deeplearn/dist/src/math/conv_util';
 
 @Component({
   selector: 'aip-text-sentiment-root',
@@ -54,16 +55,24 @@ export class StyleTransferRootComponent implements OnInit, AfterViewInit {
    */
   transfer() {
     this._transferBlocked = true;
-    this._ngZone.runOutsideAngular(() => {
-      setTimeout(() => {
-        const shape: [number, number] = [this.contentImage.nativeElement.height, this.contentImage.nativeElement.width];
+    // this._ngZone.runOutsideAngular(() => {
+    //   setTimeout(() => {
+    const shape: [number, number] = [this.contentImage.nativeElement.height, this.contentImage.nativeElement.width];
+    const targetShape: [number, number, number] = [this.contentImage.nativeElement.height, this.contentImage.nativeElement.width, 3];
 
-        const texture = (<NDArrayMathGPU>this.modelSvc.math).getTextureManager().acquireTexture(shape);
-        this.modelSvc.gpgpu.uploadPixelDataToTexture(texture, this.contentImage.nativeElement);
+    const texture = (<NDArrayMathGPU>this.modelSvc.math).getTextureManager().acquireTexture(shape);
+    this.modelSvc.gpgpu.uploadPixelDataToTexture(texture, this.contentImage.nativeElement);
+    const input = Array3D.make(targetShape, {
+      texture: texture,
+      textureShapeRC: computeTexShapeFrom3D(targetShape)
+    });
 
-        this.modelSvc.predict({canvasTexture: texture, canvasShape: shape});
-      });
-    })
+    // const vals = Array.prototype.slice.call(input.getValues());
+    // console.debug(vals, Math.max.apply(vals))
+
+    this.modelSvc.predict(input);
+    // });
+    // })
   }
 
   /**
