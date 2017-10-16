@@ -6,12 +6,8 @@ branches:
   only:
     - master
 
-cache:
-  directories:
-    - node_modules
-
 script:
-  - cd ai-playground && npm run build
+  - cd ai-playground && npm install && npm run build
 
 deploy:
   provider: pages
