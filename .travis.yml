@@ -10,7 +10,7 @@ install:
   - cd ai-playground && npm install
 
 script:
-  - cd ai-playground && npm run build
+  - npm run build
 
 deploy:
   provider: pages
