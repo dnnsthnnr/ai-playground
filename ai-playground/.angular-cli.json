@@ -35,7 +35,7 @@
     {
       "name": "prod",
       "root": "src",
-      "outDir": "../docs",
+      "outDir": "dist",
       "assets": [
         "assets",
         "favicon.ico",
