@@ -11,3 +11,4 @@
 /data/**
 /model/**
 !model/*.hdf5
+/generated/**
