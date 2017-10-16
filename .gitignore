@@ -12,3 +12,4 @@
 /model/**
 !model/*.hdf5
 /generated/**
+/docs
