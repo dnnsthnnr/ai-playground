@@ -113,8 +113,8 @@ def augment_image(img):
     return img
 
 
-def image_to_array(img, normalize=True):
-    img = np.asarray(img).astype(K.floatx())
+def image_to_array(img, normalize=True, dtype=K.floatx()):
+    img = np.asarray(img).astype(dtype)
     if normalize:
         img = img / 255
     return img
@@ -140,7 +140,20 @@ def export_keras_for_deeplearn(name):
         os.mkdir(os.path.join(MODEL_DIR, name))
     ckpt_path = saver.save(tf_session, os.path.join(MODEL_DIR, name + "/cktp"))
 
-    dump_ckpt_vars.main(ckpt_path, "../ai-playground/src/assets/deeplearn/" + name)
+    export_dir = "../ai-playground/src/assets/deeplearn/" + name
+    delete_dir_content(export_dir)
+    dump_ckpt_vars.main(ckpt_path, export_dir)
+
+
+def delete_dir_content(_dir):
+    print('deleting dir contents: {}'.format(_dir))
+    for f in os.listdir(_dir):
+        file = os.path.join(_dir, f)
+        try:
+            if os.path.isfile(file):
+                os.unlink(file)
+        except Exception as e:
+            print(e)
 
 
 def pad_image_to_square(img, mode=None, fill="white"):
@@ -199,8 +212,9 @@ class Denormalize(Layer):
 
 
 class ImageNormalize(Layer):
-    def __init__(self, **kwargs):
+    def __init__(self, factor=255, **kwargs):
         super(ImageNormalize, self).__init__(**kwargs)
+        self.factor = factor
 
     def build(self, input_shape):
         pass
@@ -210,4 +224,4 @@ class ImageNormalize(Layer):
 
     def call(self, x, mask=None):
         # x = (x - 127.5)/ 127.5
-        return x / 255.
+        return x / self.factor

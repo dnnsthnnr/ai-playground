@@ -15,8 +15,7 @@ from keras.preprocessing.image import ImageDataGenerator
 from keras.regularizers import Regularizer
 from keras.utils import get_file
 from scipy.misc import imsave
-from scipy.misc.pilutil import imshow
-
+import matplotlib.pyplot as plt
 from python import utils
 from python.utils import ImageNormalize, Denormalize
 
@@ -127,13 +126,6 @@ class StyleTransfer:
         self.style_img = self.style_img.reshape((1,) + self.style_img.shape)
         self.weight_path = os.path.join(utils.MODEL_DIR, self.weight_path.format(style))
 
-        # files = os.listdir(self.data_dir)
-        # split = int(0.2 * len(files))
-        # self.val_data = files[:split]
-        # self.train_data = files[split:]
-        #
-        # print("{} train samples, {} validations samples".format(len(self.train_data), len(self.val_data)))
-
     def build_model(self):
         img_in = Input((self.img_width, self.img_height, 3))
         norm = ImageNormalize()(img_in)
@@ -153,7 +145,8 @@ class StyleTransfer:
 
         self.model = Model(img_in, out)
         if os.path.exists(self.weight_path):
-            self.model.load_weights(self.weight_path, by_name=True)
+            print('loading weights')
+            self.model.load_weights(self.weight_path)
         self.model.summary()
 
     def loss_net(self, x_in, true_x_in):
@@ -261,7 +254,7 @@ class StyleTransfer:
         y = self.model.predict(x)[0]
 
         if not save:
-            imshow(y)
+            Image.fromarray(y.astype('uint8')).show()
         else:
             imsave(os.path.join("..", "generated", name + ".png"), y)
 
@@ -275,7 +268,7 @@ if __name__ == "__main__":
     config = tf.ConfigProto()
     config.gpu_options.per_process_gpu_memory_fraction = 0.75
     K.set_session(tf.Session(config=config))
-    st = StyleTransfer('udnie')
-    #st.export_to_frontend()
+    st = StyleTransfer('polygon')
     st.train(1)
-    # st.plot()
+    st.plot()
+    st.export_to_frontend()

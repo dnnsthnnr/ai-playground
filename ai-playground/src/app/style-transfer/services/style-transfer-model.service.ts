@@ -14,9 +14,14 @@ export class StyleTransferModelService extends DeeplearnModelService {
     super();
   }
 
+  private modelReadyMap = new Map<string, Promise<any>>();
+
+  private currentStyle = '';
+
   public loadModel(args) {
+    this.currentStyle = args.style;
     const checkpointLoader = new CheckpointLoader(document.head.baseURI + 'assets/deeplearn/style_transfer/' + args.style + '/');
-    this.modelReady = checkpointLoader.getAllVariables().then((vars) => {
+    this.modelReadyMap[this.currentStyle] = checkpointLoader.getAllVariables().then((vars) => {
       this.variables = vars;
     });
   }
@@ -28,7 +33,7 @@ export class StyleTransferModelService extends DeeplearnModelService {
    */
   public predict(args) {
 
-    this.modelReady.then(() => {
+    this.modelReadyMap[this.currentStyle].then(() => {
 
       const img = this.math.scope(() => {
         const conv1 = this.convLayer(args, 1, true, 1);

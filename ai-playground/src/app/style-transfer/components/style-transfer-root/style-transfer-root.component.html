@@ -15,7 +15,9 @@
           <div class="col-md-6 text-center">
             <h3>Style Image</h3>
             <img class="aip-style-img" [src]="'assets/styles/'+style+'.jpg'"/>
-
+            <select class="form-control mt-1" name="cImage" [(ngModel)]="style">
+                <option *ngFor="let style of styles" [value]="style.value">{{style.name}}</option>
+              </select>
           </div>
         </div>
         <div class="text-center mt-2">

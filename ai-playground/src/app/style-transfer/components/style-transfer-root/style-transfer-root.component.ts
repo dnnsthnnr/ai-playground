@@ -19,6 +19,12 @@ export class StyleTransferRootComponent implements OnInit, AfterViewInit {
     {value: 'assets/styles/golden_gate.jpg', name: 'Golden Gate'},
   ];
 
+  private _styles = [
+    {value: 'udnie', name: 'Udnie, Francis Picabia'},
+    {value: 'pencil', name: 'Pencil drawing'},
+    {value: 'rain_princess', name: 'Rain Princess, Leonid Afremov'},
+  ];
+
   @ViewChild('drawCanvas')
   private resultCanvas: ElementRef;
   private resultCtx;
@@ -36,7 +42,6 @@ export class StyleTransferRootComponent implements OnInit, AfterViewInit {
 
 
   ngOnInit() {
-    this.modelSvc.loadModel({style: this._style});
     this.modelSvc.predictionFinished.subscribe((result) => {
       this._ngZone.run(() => {
         this.drawImageToCanvas(result);
@@ -55,6 +60,7 @@ export class StyleTransferRootComponent implements OnInit, AfterViewInit {
    */
   transfer() {
     this._transferBlocked = true;
+    this.modelSvc.loadModel({style: this._style});
     // this._ngZone.runOutsideAngular(() => {
     //   setTimeout(() => {
     const shape: [number, number] = [this.contentImage.nativeElement.height, this.contentImage.nativeElement.width];
@@ -106,12 +112,16 @@ export class StyleTransferRootComponent implements OnInit, AfterViewInit {
     return this._modelSvc;
   }
 
-  get contentImages(): ({ value: string; name: string } | { value: string; name: string } | { value: string; name: string } | { value: string; name: string } | { value: string; name: string } | { value: string; name: string })[] {
+  get contentImages(): { value: string, name: string }[] {
     return this._contentImages;
   }
 
   get style(): string {
     return this._style;
+  }
+
+  set style(value: string) {
+    this._style = value;
   }
 
   get contentSrc(): string {
@@ -124,6 +134,10 @@ export class StyleTransferRootComponent implements OnInit, AfterViewInit {
 
   get transferBlocked(): boolean {
     return this._transferBlocked;
+  }
+
+  get styles(): { value: string; name: string }[] {
+    return this._styles;
   }
 }
 
