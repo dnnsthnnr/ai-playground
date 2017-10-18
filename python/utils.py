@@ -141,7 +141,8 @@ def export_keras_for_deeplearn(name):
     ckpt_path = saver.save(tf_session, os.path.join(MODEL_DIR, name + "/cktp"))
 
     export_dir = "../ai-playground/src/assets/deeplearn/" + name
-    delete_dir_content(export_dir)
+    if os.path.exists(export_dir):
+        delete_dir_content(export_dir)
     dump_ckpt_vars.main(ckpt_path, export_dir)
 
 

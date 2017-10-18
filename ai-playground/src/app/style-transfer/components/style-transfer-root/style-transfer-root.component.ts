@@ -2,6 +2,7 @@ import {AfterViewInit, Component, ElementRef, NgZone, OnInit, ViewChild} from '@
 import {StyleTransferModelService} from '../../services/style-transfer-model.service';
 import {Array3D, NDArrayMathGPU} from 'deeplearn';
 import {computeTexShapeFrom3D} from 'deeplearn/dist/src/math/conv_util';
+import {DomSanitizer} from "@angular/platform-browser";
 
 @Component({
   selector: 'aip-text-sentiment-root',
@@ -23,6 +24,7 @@ export class StyleTransferRootComponent implements OnInit, AfterViewInit {
     {value: 'udnie', name: 'Udnie, Francis Picabia'},
     {value: 'pencil', name: 'Pencil drawing'},
     {value: 'rain_princess', name: 'Rain Princess, Leonid Afremov'},
+    {value: 'polygon', name: 'Polygon Art'},
   ];
 
   @ViewChild('drawCanvas')
@@ -32,12 +34,15 @@ export class StyleTransferRootComponent implements OnInit, AfterViewInit {
   @ViewChild('contentImage')
   private contentImage: ElementRef;
 
+  @ViewChild('fileLoader')
+  private fileLoader: ElementRef;
+
   private _style = 'udnie';
-  private _contentSrc = 'assets/styles/stata.jpg';
+  private _contentSrc : any = 'assets/styles/stata.jpg';
 
   private _transferBlocked = false;
 
-  constructor(private _modelSvc: StyleTransferModelService, private _ngZone: NgZone) {
+  constructor(private _modelSvc: StyleTransferModelService, private _ngZone: NgZone, private sanitizer: DomSanitizer) {
   }
 
 
@@ -53,6 +58,18 @@ export class StyleTransferRootComponent implements OnInit, AfterViewInit {
 
   ngAfterViewInit() {
     this.resultCtx = this.resultCanvas.nativeElement.getContext('2d');
+  }
+
+  onCustomContentSelect(event) {
+    if (this.contentSrc == 'custom') {
+      console.debug('custom');
+      this.fileLoader.nativeElement.click();
+    }
+  }
+
+  loadFile($event){
+    console.debug($event.target.files);
+    this._contentSrc = this.sanitizer.bypassSecurityTrustUrl(URL.createObjectURL($event.target.files[0]));
   }
 
   /**

@@ -7,17 +7,19 @@
             <h3>Transformation Image</h3>
             <img #contentImage class="aip-style-img" [src]="contentSrc"/>
             <div class="mt-1">
-              <select class="form-control" name="cImage" [(ngModel)]="contentSrc">
+              <select class="form-control" name="cImage" (change)="onCustomContentSelect($event)" [(ngModel)]="contentSrc">
                 <option *ngFor="let content of contentImages" [value]="content.value">{{content.name}}</option>
+                <option value="custom">Upload</option>
               </select>
+              <input type="file" #fileLoader style="display: none;" (change)="loadFile($event)">
             </div>
           </div>
           <div class="col-md-6 text-center">
             <h3>Style Image</h3>
             <img class="aip-style-img" [src]="'assets/styles/'+style+'.jpg'"/>
-            <select class="form-control mt-1" name="cImage" [(ngModel)]="style">
-                <option *ngFor="let style of styles" [value]="style.value">{{style.name}}</option>
-              </select>
+            <select class="form-control mt-1" name="cImage" title="select style image" [(ngModel)]="style">
+              <option *ngFor="let style of styles" [value]="style.value">{{style.name}}</option>
+            </select>
           </div>
         </div>
         <div class="text-center mt-2">

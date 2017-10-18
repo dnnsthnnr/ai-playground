@@ -269,6 +269,6 @@ if __name__ == "__main__":
     config.gpu_options.per_process_gpu_memory_fraction = 0.75
     K.set_session(tf.Session(config=config))
     st = StyleTransfer('polygon')
-    st.train(1)
+    #st.train(1)
     st.plot()
     st.export_to_frontend()
