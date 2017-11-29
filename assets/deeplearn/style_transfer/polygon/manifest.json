@@ -1,0 +1,644 @@
+{
+  "batch_normalization_1/beta": {
+    "filename": "batch_normalization_1_beta",
+    "shape": [
+      32
+    ]
+  },
+  "batch_normalization_1/gamma": {
+    "filename": "batch_normalization_1_gamma",
+    "shape": [
+      32
+    ]
+  },
+  "batch_normalization_1/moving_mean": {
+    "filename": "batch_normalization_1_moving_mean",
+    "shape": [
+      32
+    ]
+  },
+  "batch_normalization_1/moving_variance": {
+    "filename": "batch_normalization_1_moving_variance",
+    "shape": [
+      32
+    ]
+  },
+  "batch_normalization_10/beta": {
+    "filename": "batch_normalization_10_beta",
+    "shape": [
+      128
+    ]
+  },
+  "batch_normalization_10/gamma": {
+    "filename": "batch_normalization_10_gamma",
+    "shape": [
+      128
+    ]
+  },
+  "batch_normalization_10/moving_mean": {
+    "filename": "batch_normalization_10_moving_mean",
+    "shape": [
+      128
+    ]
+  },
+  "batch_normalization_10/moving_variance": {
+    "filename": "batch_normalization_10_moving_variance",
+    "shape": [
+      128
+    ]
+  },
+  "batch_normalization_11/beta": {
+    "filename": "batch_normalization_11_beta",
+    "shape": [
+      128
+    ]
+  },
+  "batch_normalization_11/gamma": {
+    "filename": "batch_normalization_11_gamma",
+    "shape": [
+      128
+    ]
+  },
+  "batch_normalization_11/moving_mean": {
+    "filename": "batch_normalization_11_moving_mean",
+    "shape": [
+      128
+    ]
+  },
+  "batch_normalization_11/moving_variance": {
+    "filename": "batch_normalization_11_moving_variance",
+    "shape": [
+      128
+    ]
+  },
+  "batch_normalization_12/beta": {
+    "filename": "batch_normalization_12_beta",
+    "shape": [
+      128
+    ]
+  },
+  "batch_normalization_12/gamma": {
+    "filename": "batch_normalization_12_gamma",
+    "shape": [
+      128
+    ]
+  },
+  "batch_normalization_12/moving_mean": {
+    "filename": "batch_normalization_12_moving_mean",
+    "shape": [
+      128
+    ]
+  },
+  "batch_normalization_12/moving_variance": {
+    "filename": "batch_normalization_12_moving_variance",
+    "shape": [
+      128
+    ]
+  },
+  "batch_normalization_13/beta": {
+    "filename": "batch_normalization_13_beta",
+    "shape": [
+      128
+    ]
+  },
+  "batch_normalization_13/gamma": {
+    "filename": "batch_normalization_13_gamma",
+    "shape": [
+      128
+    ]
+  },
+  "batch_normalization_13/moving_mean": {
+    "filename": "batch_normalization_13_moving_mean",
+    "shape": [
+      128
+    ]
+  },
+  "batch_normalization_13/moving_variance": {
+    "filename": "batch_normalization_13_moving_variance",
+    "shape": [
+      128
+    ]
+  },
+  "batch_normalization_14/beta": {
+    "filename": "batch_normalization_14_beta",
+    "shape": [
+      64
+    ]
+  },
+  "batch_normalization_14/gamma": {
+    "filename": "batch_normalization_14_gamma",
+    "shape": [
+      64
+    ]
+  },
+  "batch_normalization_14/moving_mean": {
+    "filename": "batch_normalization_14_moving_mean",
+    "shape": [
+      64
+    ]
+  },
+  "batch_normalization_14/moving_variance": {
+    "filename": "batch_normalization_14_moving_variance",
+    "shape": [
+      64
+    ]
+  },
+  "batch_normalization_15/beta": {
+    "filename": "batch_normalization_15_beta",
+    "shape": [
+      32
+    ]
+  },
+  "batch_normalization_15/gamma": {
+    "filename": "batch_normalization_15_gamma",
+    "shape": [
+      32
+    ]
+  },
+  "batch_normalization_15/moving_mean": {
+    "filename": "batch_normalization_15_moving_mean",
+    "shape": [
+      32
+    ]
+  },
+  "batch_normalization_15/moving_variance": {
+    "filename": "batch_normalization_15_moving_variance",
+    "shape": [
+      32
+    ]
+  },
+  "batch_normalization_16/beta": {
+    "filename": "batch_normalization_16_beta",
+    "shape": [
+      3
+    ]
+  },
+  "batch_normalization_16/gamma": {
+    "filename": "batch_normalization_16_gamma",
+    "shape": [
+      3
+    ]
+  },
+  "batch_normalization_16/moving_mean": {
+    "filename": "batch_normalization_16_moving_mean",
+    "shape": [
+      3
+    ]
+  },
+  "batch_normalization_16/moving_variance": {
+    "filename": "batch_normalization_16_moving_variance",
+    "shape": [
+      3
+    ]
+  },
+  "batch_normalization_2/beta": {
+    "filename": "batch_normalization_2_beta",
+    "shape": [
+      64
+    ]
+  },
+  "batch_normalization_2/gamma": {
+    "filename": "batch_normalization_2_gamma",
+    "shape": [
+      64
+    ]
+  },
+  "batch_normalization_2/moving_mean": {
+    "filename": "batch_normalization_2_moving_mean",
+    "shape": [
+      64
+    ]
+  },
+  "batch_normalization_2/moving_variance": {
+    "filename": "batch_normalization_2_moving_variance",
+    "shape": [
+      64
+    ]
+  },
+  "batch_normalization_3/beta": {
+    "filename": "batch_normalization_3_beta",
+    "shape": [
+      128
+    ]
+  },
+  "batch_normalization_3/gamma": {
+    "filename": "batch_normalization_3_gamma",
+    "shape": [
+      128
+    ]
+  },
+  "batch_normalization_3/moving_mean": {
+    "filename": "batch_normalization_3_moving_mean",
+    "shape": [
+      128
+    ]
+  },
+  "batch_normalization_3/moving_variance": {
+    "filename": "batch_normalization_3_moving_variance",
+    "shape": [
+      128
+    ]
+  },
+  "batch_normalization_4/beta": {
+    "filename": "batch_normalization_4_beta",
+    "shape": [
+      128
+    ]
+  },
+  "batch_normalization_4/gamma": {
+    "filename": "batch_normalization_4_gamma",
+    "shape": [
+      128
+    ]
+  },
+  "batch_normalization_4/moving_mean": {
+    "filename": "batch_normalization_4_moving_mean",
+    "shape": [
+      128
+    ]
+  },
+  "batch_normalization_4/moving_variance": {
+    "filename": "batch_normalization_4_moving_variance",
+    "shape": [
+      128
+    ]
+  },
+  "batch_normalization_5/beta": {
+    "filename": "batch_normalization_5_beta",
+    "shape": [
+      128
+    ]
+  },
+  "batch_normalization_5/gamma": {
+    "filename": "batch_normalization_5_gamma",
+    "shape": [
+      128
+    ]
+  },
+  "batch_normalization_5/moving_mean": {
+    "filename": "batch_normalization_5_moving_mean",
+    "shape": [
+      128
+    ]
+  },
+  "batch_normalization_5/moving_variance": {
+    "filename": "batch_normalization_5_moving_variance",
+    "shape": [
+      128
+    ]
+  },
+  "batch_normalization_6/beta": {
+    "filename": "batch_normalization_6_beta",
+    "shape": [
+      128
+    ]
+  },
+  "batch_normalization_6/gamma": {
+    "filename": "batch_normalization_6_gamma",
+    "shape": [
+      128
+    ]
+  },
+  "batch_normalization_6/moving_mean": {
+    "filename": "batch_normalization_6_moving_mean",
+    "shape": [
+      128
+    ]
+  },
+  "batch_normalization_6/moving_variance": {
+    "filename": "batch_normalization_6_moving_variance",
+    "shape": [
+      128
+    ]
+  },
+  "batch_normalization_7/beta": {
+    "filename": "batch_normalization_7_beta",
+    "shape": [
+      128
+    ]
+  },
+  "batch_normalization_7/gamma": {
+    "filename": "batch_normalization_7_gamma",
+    "shape": [
+      128
+    ]
+  },
+  "batch_normalization_7/moving_mean": {
+    "filename": "batch_normalization_7_moving_mean",
+    "shape": [
+      128
+    ]
+  },
+  "batch_normalization_7/moving_variance": {
+    "filename": "batch_normalization_7_moving_variance",
+    "shape": [
+      128
+    ]
+  },
+  "batch_normalization_8/beta": {
+    "filename": "batch_normalization_8_beta",
+    "shape": [
+      128
+    ]
+  },
+  "batch_normalization_8/gamma": {
+    "filename": "batch_normalization_8_gamma",
+    "shape": [
+      128
+    ]
+  },
+  "batch_normalization_8/moving_mean": {
+    "filename": "batch_normalization_8_moving_mean",
+    "shape": [
+      128
+    ]
+  },
+  "batch_normalization_8/moving_variance": {
+    "filename": "batch_normalization_8_moving_variance",
+    "shape": [
+      128
+    ]
+  },
+  "batch_normalization_9/beta": {
+    "filename": "batch_normalization_9_beta",
+    "shape": [
+      128
+    ]
+  },
+  "batch_normalization_9/gamma": {
+    "filename": "batch_normalization_9_gamma",
+    "shape": [
+      128
+    ]
+  },
+  "batch_normalization_9/moving_mean": {
+    "filename": "batch_normalization_9_moving_mean",
+    "shape": [
+      128
+    ]
+  },
+  "batch_normalization_9/moving_variance": {
+    "filename": "batch_normalization_9_moving_variance",
+    "shape": [
+      128
+    ]
+  },
+  "conv2d_1/bias": {
+    "filename": "conv2d_1_bias",
+    "shape": [
+      32
+    ]
+  },
+  "conv2d_1/kernel": {
+    "filename": "conv2d_1_kernel",
+    "shape": [
+      9,
+      9,
+      3,
+      32
+    ]
+  },
+  "conv2d_10/bias": {
+    "filename": "conv2d_10_bias",
+    "shape": [
+      128
+    ]
+  },
+  "conv2d_10/kernel": {
+    "filename": "conv2d_10_kernel",
+    "shape": [
+      3,
+      3,
+      128,
+      128
+    ]
+  },
+  "conv2d_11/bias": {
+    "filename": "conv2d_11_bias",
+    "shape": [
+      128
+    ]
+  },
+  "conv2d_11/kernel": {
+    "filename": "conv2d_11_kernel",
+    "shape": [
+      3,
+      3,
+      128,
+      128
+    ]
+  },
+  "conv2d_12/bias": {
+    "filename": "conv2d_12_bias",
+    "shape": [
+      128
+    ]
+  },
+  "conv2d_12/kernel": {
+    "filename": "conv2d_12_kernel",
+    "shape": [
+      3,
+      3,
+      128,
+      128
+    ]
+  },
+  "conv2d_13/bias": {
+    "filename": "conv2d_13_bias",
+    "shape": [
+      128
+    ]
+  },
+  "conv2d_13/kernel": {
+    "filename": "conv2d_13_kernel",
+    "shape": [
+      3,
+      3,
+      128,
+      128
+    ]
+  },
+  "conv2d_14/bias": {
+    "filename": "conv2d_14_bias",
+    "shape": [
+      64
+    ]
+  },
+  "conv2d_14/kernel": {
+    "filename": "conv2d_14_kernel",
+    "shape": [
+      3,
+      3,
+      64,
+      64
+    ]
+  },
+  "conv2d_15/bias": {
+    "filename": "conv2d_15_bias",
+    "shape": [
+      32
+    ]
+  },
+  "conv2d_15/kernel": {
+    "filename": "conv2d_15_kernel",
+    "shape": [
+      3,
+      3,
+      32,
+      32
+    ]
+  },
+  "conv2d_16/bias": {
+    "filename": "conv2d_16_bias",
+    "shape": [
+      3
+    ]
+  },
+  "conv2d_16/kernel": {
+    "filename": "conv2d_16_kernel",
+    "shape": [
+      9,
+      9,
+      32,
+      3
+    ]
+  },
+  "conv2d_2/bias": {
+    "filename": "conv2d_2_bias",
+    "shape": [
+      64
+    ]
+  },
+  "conv2d_2/kernel": {
+    "filename": "conv2d_2_kernel",
+    "shape": [
+      3,
+      3,
+      32,
+      64
+    ]
+  },
+  "conv2d_3/bias": {
+    "filename": "conv2d_3_bias",
+    "shape": [
+      128
+    ]
+  },
+  "conv2d_3/kernel": {
+    "filename": "conv2d_3_kernel",
+    "shape": [
+      3,
+      3,
+      64,
+      128
+    ]
+  },
+  "conv2d_4/bias": {
+    "filename": "conv2d_4_bias",
+    "shape": [
+      128
+    ]
+  },
+  "conv2d_4/kernel": {
+    "filename": "conv2d_4_kernel",
+    "shape": [
+      3,
+      3,
+      128,
+      128
+    ]
+  },
+  "conv2d_5/bias": {
+    "filename": "conv2d_5_bias",
+    "shape": [
+      128
+    ]
+  },
+  "conv2d_5/kernel": {
+    "filename": "conv2d_5_kernel",
+    "shape": [
+      3,
+      3,
+      128,
+      128
+    ]
+  },
+  "conv2d_6/bias": {
+    "filename": "conv2d_6_bias",
+    "shape": [
+      128
+    ]
+  },
+  "conv2d_6/kernel": {
+    "filename": "conv2d_6_kernel",
+    "shape": [
+      3,
+      3,
+      128,
+      128
+    ]
+  },
+  "conv2d_7/bias": {
+    "filename": "conv2d_7_bias",
+    "shape": [
+      128
+    ]
+  },
+  "conv2d_7/kernel": {
+    "filename": "conv2d_7_kernel",
+    "shape": [
+      3,
+      3,
+      128,
+      128
+    ]
+  },
+  "conv2d_8/bias": {
+    "filename": "conv2d_8_bias",
+    "shape": [
+      128
+    ]
+  },
+  "conv2d_8/kernel": {
+    "filename": "conv2d_8_kernel",
+    "shape": [
+      3,
+      3,
+      128,
+      128
+    ]
+  },
+  "conv2d_9/bias": {
+    "filename": "conv2d_9_bias",
+    "shape": [
+      128
+    ]
+  },
+  "conv2d_9/kernel": {
+    "filename": "conv2d_9_kernel",
+    "shape": [
+      3,
+      3,
+      128,
+      128
+    ]
+  },
+  "conv2d_transpose_1/kernel": {
+    "filename": "conv2d_transpose_1_kernel",
+    "shape": [
+      3,
+      3,
+      64,
+      128
+    ]
+  },
+  "conv2d_transpose_2/kernel": {
+    "filename": "conv2d_transpose_2_kernel",
+    "shape": [
+      3,
+      3,
+      32,
+      64
+    ]
+  }
+}
